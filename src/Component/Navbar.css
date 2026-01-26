@@ -1,0 +1,138 @@
+/* Main navbar */
+/* .navbar {
+  background-color: #251919ce; /* dark ecommerce theme */
+  /* padding: 14px 0;
+  border-bottom: 1px solid #2c2c2c;
+height: 50px;  */
+    /* list-style: none; */
+  /* display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
+} */
+
+/* Category list */
+/* btton{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
+} */
+
+/* Category item */
+/* .navbar button{
+  color: #2b539d;
+  font-size: 14px;
+  font-weight: 100;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+height: 40px;
+width: 100px;
+margin-top: 10px;
+}
+button:hover{
+  color: #ff9f00;
+}
+
+.navbar button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #ff9f00;
+  transition: width 0.3s ease;
+} */
+/* Hover effect */
+/* .nav-list li:hover {
+  color: #ff9f00; /* ecommerce highlight color */
+/* }  */
+
+/* Bottom line animation */
+/* .nav-list li::after { */
+/* .nav-list li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #ff9f00;
+  transition: width 0.3s ease;
+} */
+
+/* .nav-list li:hover::after {
+  width: 100%;
+} */
+
+.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px;
+  /* border: 2px solid; */
+    background-color: #251919ce;;
+}
+
+.navbar button {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  padding: 8px 5px;
+}
+
+/* 👇 hidden line */
+.navbar button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #0d6efd;
+  transition: width 0.3s ease;
+}
+
+/* 👇 show line only on active */
+.navbar button.active::after {
+  width: 100%;
+}
+
+.cart{
+margin: auto;
+
+}
+.cart-container {
+  position: relative;
+  margin-left: auto; /* right side le jane ke liye */
+}
+
+.cartstyle {
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

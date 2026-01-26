@@ -1,0 +1,108 @@
+.header {
+  height: 70px;
+  padding: 0 30px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+.logo span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.login-btn {
+  padding: 8px 20px;
+  border: none;
+  background-color: #251919ce;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid;
+}
+
+.user-box {
+  display: flex;
+  flex-direction: column;   /* icon ke niche name */
+  align-items: center;
+ 
+  cursor: pointer;
+}
+
+.user-icon {
+  font-size: 22px;
+  height: 50%;
+  width: 50%;
+  border: 1px solid;
+  border-radius: 50%;
+  padding: 10px;
+  
+}
+
+.user-name {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Dropdown card */
+.profile-dropdown {
+  position: absolute;
+  top: 62px;
+  right: 7px;
+  width: 150px;
+  background: #fff;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  z-index: 1000;
+}
+
+/* Profile text */
+.profile-name {
+  font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-email {
+  font-size: 13px;
+  color: #666;
+  margin: 4px 0 12px;
+  word-break: break-all;
+}
+
+/* Logout button */
+.logout-btn {
+   font-weight: 600;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: none;
+}
+
+
