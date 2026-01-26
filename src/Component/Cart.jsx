@@ -7,11 +7,12 @@ function Cart() {
   const location=useLocation()
   const data = localStorage.getItem("cartItems");
       const parsed = JSON.parse(data);
+      console.log("parsed",parsed)
     
   return (
     <>
     
-     {location.pathname=='/' &&(
+     {location.pathname=='/' &&  parsed!==null &&(
 
       <div className="cart-container" onClick={()=>navigate('/cart')}>
          
