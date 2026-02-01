@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Buy.css";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 
 function Checkout() {
   const [form, setForm] = useState({
@@ -15,6 +17,7 @@ function Checkout() {
     coupon: "",
     agree: false
   });
+  const navigator=useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -22,11 +25,52 @@ function Checkout() {
       ...form,
       [name]: type === "checkbox" ? checked : value
     });
+  
+    
   };
 
   const handleSave = () => {
-    console.log("Saved Address:", form);
-    toast.error("Address Saved!");
+    //  console.log("Saved Address:", form);
+      //  console.log('form data',form)
+  
+if (!form.name) {
+   toast.error("Name is required");
+}
+else if (!form.phone) {
+   toast.error("Phone number is required");
+}
+else if (!form.state) {
+   toast.error("state is required");
+}
+else if (!form.district) {
+   toast.error("district is required");
+}
+else if (!form.pincode) {
+   toast.error("pincode is required");
+}
+else if (!form.alternate) {
+   toast.error("alternate is required");
+}
+else if (!form.landmark) {
+   toast.error("landmark is required");
+}
+else if (!form.address) {
+   toast.error("Address is required");
+}
+else if (!form.coupon) {
+   toast.error("coupon is required");
+}
+else if (!form.agree) {
+   toast.error("agree is required");
+}
+
+else{
+  
+    toast.success("Address Saved!");
+}
+
+  
+   
   };
 
   const handleCheckout = () => {
@@ -38,9 +82,23 @@ function Checkout() {
   };
 
   return (
+
+<>
+  <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
+    
     <div className="checkout-container">
       {/* LEFT FORM */}
       <div className="address-box">
+           <button onClick={()=>navigator("/")} style={{cursor:"pointer"}}>back to home</button>
         <div className="row">
           <div>
             <label>Name:</label>
@@ -50,6 +108,9 @@ function Checkout() {
               placeholder="Enter name"
               value={form.name}
               onChange={handleChange}
+               
+              
+                  // onChange={(e) => setname(e.target.value)}
             />
           </div>
 
@@ -136,7 +197,7 @@ function Checkout() {
           />
         </div>
 
-        <button className="save-btn" onClick={handleSave}>
+        <button type="button" className="save-btn" onClick={handleSave}>
           Save
         </button>
       </div>
@@ -193,6 +254,7 @@ function Checkout() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

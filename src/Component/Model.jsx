@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import OtpInput from "react-otp-input";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { TbEdit } from "react-icons/tb";
 
 function Model({ onHide }) {
   const [number, setnumber] = useState("")
@@ -16,6 +17,8 @@ function Model({ onHide }) {
   const [password, setpassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [hideon, sethideon] = useState(false)
+  const [Confirmhideon,setConfirmhideon]=useState(false);
+  const [edit, setedit] = useState('');
 
 
   const otpdata = "123456"
@@ -24,10 +27,10 @@ function Model({ onHide }) {
 
 
 
-  console.log("otpdata", otp)
+  // console.log("otpdata", otp)
   const handlechange = (value) => {
     let valuenum = value.replace(/[^0-9]/g, "");
-    console.log(valuenum)
+    // console.log("vivekhillo=", valuenum)
     if (valuenum.length > 10) return;
     if (valuenum.length == 10) {
       setnumbtn(true)
@@ -39,7 +42,7 @@ function Model({ onHide }) {
       return;
     }
 
-
+    setedit(valuenum);
     setnumber(valuenum);
   };
 
@@ -73,27 +76,33 @@ function Model({ onHide }) {
       toast.error("enter your email")
     } else if (!password) {
       toast.error("enter you password")
-    }else if(password.length<7){
+    } else if (password.length < 7) {
       toast.error("password must greater than 8 digit")
     }
-    
+
     else if (!confirmPassword) {
       toast.error("enter your confirmpassoword")
     } else if (password != confirmPassword) {
       toast.error("password not match")
     }
     else {
-     let userobj={
-      name:name,
-      emaildata:email,
-      password:password
-     }
+      let userobj = {
+        name: name,
+        emaildata: email,
+        password: password
+      }
 
       localStorage.setItem("userData", JSON.stringify(userobj));
       toast.success("successfully ragistesion")
       onHide();
     }
 
+  }
+  const handleEditnum = () => {
+    setotpbox(false);
+  }
+  const ResendOtp = () => {
+    toast.success("successfully resend otp ")
   }
 
 
@@ -145,7 +154,16 @@ function Model({ onHide }) {
                 <span className="logo">Next Toppers</span>
                 <span>OTP Verification </span><br />
                 <span style={{ color: "gray", fontSize: "12px" }}>Please enter the 6-digit code we sent to your mobile number</span>
+                <br /><br />
+                <div style={{ color: "gray", fontSize: "14px" }}> +91{edit}
+                  <sub>
+                    <button onClick={handleEditnum} style={{ border: "none", background: "none" }}>
+                      <sub><TbEdit style={{ cursor: "pointer", fontSize: "19px" }} /></sub>
 
+                    </button>
+                  </sub>
+                </div>
+                <br /><br />
 
                 <OtpInput
                   value={otp}
@@ -164,6 +182,13 @@ function Model({ onHide }) {
                   }}
                 />
 
+                <p style={{ color: "gray", fontSize: "12px" }}>Didn't receive code?
+                  <button onClick={ResendOtp} style={{
+                    color: "gray", fontSize: "12px",
+                    border: "none", cursor: "pointer", background: "none"
+                  }}>
+                    <h4>Resend</h4></button> </p>
+                <br /><br />
                 <button className="continue-btn"
 
                   style={{ background: otp.length == 6 ? "#565454" : "#999" }}
@@ -178,7 +203,7 @@ function Model({ onHide }) {
 
 
           {userform && (
-            <div class="form-container">
+            <div className="form-container">
               <form name="frm" className="custom-form" onSubmit={handleSumbitdata}  >
                 <h3>Create Account</h3>
 
@@ -196,7 +221,8 @@ function Model({ onHide }) {
                   placeholder="Enter your email"
                   onChange={(e) => setemail(e.target.value)}
                 />
-                <div className="passclass" style={{ display: "flex", border: "1px solid grey", borderRadius: "9px" }}>
+                <div className="passclass" style={{ display: "flex",
+                   border: "1px solid grey", borderRadius: "9px" }}>
                   <input type={hideon ? "text" : "password"}
                     value={password}
                     placeholder="Enter your password"
@@ -219,7 +245,7 @@ function Model({ onHide }) {
 
                 </div>
                 <div className="passclass" style={{ display: "flex", border: "1px solid grey", borderRadius: "8px" }}>
-                  <input type="password"
+                  <input type={Confirmhideon?"text":"password"}
                     value={confirmPassword}
                     placeholder="conFirm your password"
                     className="passinput"
@@ -227,7 +253,14 @@ function Model({ onHide }) {
                     onChange={(e) => setConfirmPassword(e.target.value)}
 
                   />
-                  <span className="icaneye"><FaEye /></span>
+                  <span className="icaneye"
+                   onClick={(e) => {
+                      e.preventDefault();
+                      setConfirmhideon(!Confirmhideon);
+                    }}
+                  >
+                     {Confirmhideon ? <FaEye /> : <FaEyeSlash />}
+                    </span>
                 </div>
                 <button type="submit">Register</button>
               </form>

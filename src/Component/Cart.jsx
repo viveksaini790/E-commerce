@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate ,useLocation} from 'react-router-dom';
 
-function Cart() {
+// function Cart({cartLength}) {
+function Cart(filtercartproduct) {
+
+console.log('filtercartobj in the cart',filtercartproduct)
+
   const navigate=useNavigate()
   const location=useLocation()
+
+  // const [CartProduct,setCartProduct]=useState([]);
+
   const data = localStorage.getItem("cartItems");
       const parsed = JSON.parse(data);
       console.log("parsed",parsed)
-    
+
+//  useEffect(() => {
+//     setCartProduct(cartLength);
+//   }, [cartLength]); 
+
   return (
     <>
     
@@ -23,6 +34,15 @@ function Cart() {
          
         </div>
      )}
+     <div> 
+     
+     
+     
+      {/* {CartProduct.map((pro)=>{
+      console.log('procart',pro)
+     })} */}
+
+     </div>
     </>
   )
 }

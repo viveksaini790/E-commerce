@@ -2,7 +2,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom"
 import Home from "./Home"
 import Login from "./Component/Login"
 import Cart from "./Component/Cart"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 import Checkout from "./Component/Buy/Buy"
 const App = () => {
 

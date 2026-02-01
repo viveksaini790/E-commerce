@@ -3,8 +3,7 @@ import Header from './Component/Header';
 import Navbar from './Component/Navbar';
 import { useState, useEffect, } from 'react';
 import './home.css';
-import { ToastContainer } from 'react-toastify';
-// import Login from './Component/Login';
+import { toast, ToastContainer } from 'react-toastify';
 import Model from './Component/Model';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,15 +16,32 @@ function Home() {
   const [userData, setuserData] = useState([]);
   const [filtercategory, setfiltercategory] = useState([]);
   const [Expended, setExpended] = useState([]);
+   const [filtercartproduct,setfiltercartproduct]=useState([]);
+// const [filtercartproduct, setfiltercartproduct] = useState(() => {
+//   return JSON.parse(localStorage.getItem("filterCart")) || [];
+// });
+
+  
   const [cartLength, setcartLength] = useState(() => {
     const data = localStorage.getItem("cartItems");
     if (data) {
       const parsed = JSON.parse(data);
       return parsed;
-    } else {
+    }
+    
+    else {
       return [];
     }
+
   });
+
+  useEffect(()=>{
+    const filterobj=myapi.products.filter((pro1)=>
+     pro1.id == cartLength);
+
+    setfiltercartproduct([...filtercartproduct, ...filterobj])
+    //  setfiltercartproduct(prev=>[...prev, ...filterobj])
+  },[cartLength])
 
   const navigate=useNavigate()
 
@@ -63,10 +79,12 @@ function Home() {
     )
   }
 
-  console.log("expnded", Expended)
+  // console.log("expnded", Expended)
 
 
   const handleAddtoCart = (id) => {
+ toast.error('login profile')
+
 
     setcartLength((pre) => {
       const cartarray = [...pre, id]
@@ -85,7 +103,7 @@ function Home() {
 
   }
 
-  console.log("cartLength", cartLength)
+  // console.log("cartLength", cartLength)
 
    if (!userData.length) {
     return <div>Loading...</div>;
@@ -107,8 +125,7 @@ function Home() {
 
 
       <Header />
-      <Navbar proCategory={createCategory} cartLength={cartLength} />
-
+       <Navbar proCategory={createCategory} filtercartproduct={filtercartproduct} />
       <div className='pro-cards'>
         {filtercategory.map((item) => {
 
@@ -142,6 +159,7 @@ function Home() {
               <button className='addbtn' onClick={() => {
                 cartLength.includes(item.id) ?
                   handleremoveId(item.id)
+                 
                   :
                   handleAddtoCart(item.id)
               }
