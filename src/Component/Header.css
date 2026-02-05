@@ -64,6 +64,7 @@
 .user-name {
   font-size: 12px;
   margin-top: 4px;
+  color: red
 }
 
 /* Dropdown card */
@@ -82,10 +83,12 @@
 
 /* Profile text */
 .profile-name {
-  font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+ font-weight: 600;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: none;
 }
 
 .profile-email {

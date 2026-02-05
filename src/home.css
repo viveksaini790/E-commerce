@@ -1,4 +1,4 @@
-.pro-cards {
+/* .pro-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
@@ -9,7 +9,6 @@
   border: 1px solid #ddd;
   padding: 12px;
   border-radius: 8px;
-  /* text-align: center; */
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -23,13 +22,13 @@
   width: 100%;
   height: 150px;
   object-fit: contain;
-  transition: transform 0.4s ease; /* 👈 smooth zoom */
+  transition: transform 0.4s ease; 
 }
 
 
 
 .pro:hover img {
-  transform: scale(1.15); /* 👈 zoom on hover */
+  transform: scale(1.15);
 }
 
 
@@ -38,11 +37,7 @@
   border: none; 
   
   color: #3020de;
-  /* font-size: 14px;
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s; */
+
   cursor: pointer;
 }
 
@@ -83,4 +78,201 @@
   background-color: white;
   color: black;
   border: 2px solid;
+} */
+
+
+/* -----------------------------
+   Global Reset
+------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+}
+
+/* -----------------------------
+   Toast Responsive
+------------------------------ */
+.Toastify__toast-container {
+  width: auto;
+  max-width: 360px;
+}
+
+@media (max-width: 480px) {
+  .Toastify__toast-container {
+    right: 8px;
+    left: 8px;
+    top: 10px;
+    width: auto;
+  }
+}
+
+/* -----------------------------
+   Product Cards Container
+------------------------------ */
+.pro-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* -----------------------------
+   Product Card
+------------------------------ */
+.pro {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pro:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* -----------------------------
+   Image Section
+------------------------------ */
+.img {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f1f1f1;
+}
+
+.pro-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* -----------------------------
+   Text Content
+------------------------------ */
+.pro h3 {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #222;
+}
+
+.pro p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.pro h4 {
+  margin: 10px 0;
+  font-size: 15px;
+  color: #0d6efd;
+}
+
+/* -----------------------------
+   Read More Button
+------------------------------ */
+.decripbtn {
+  background: none;
+  border: none;
+  color: #0d6efd;
+  cursor: pointer;
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+/* -----------------------------
+   Buttons
+------------------------------ */
+.addbtn,
+.buybtn {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.addbtn {
+  background-color: #198754;
+  color: #ffffff;
+}
+
+.addbtn:hover {
+  background-color: #157347;
+}
+
+.buybtn {
+  background-color: #fd7e14;
+  color: #ffffff;
+}
+
+.buybtn:hover {
+  background-color: #e8590c;
+}
+
+/* -----------------------------
+   Tablet (<= 768px)
+------------------------------ */
+@media (max-width: 768px) {
+  .pro-cards {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 15px;
+  }
+
+  .img {
+    height: 180px;
+  }
+
+  .pro h3 {
+    font-size: 15px;
+  }
+}
+
+/* -----------------------------
+   Mobile (<= 480px)
+------------------------------ */
+@media (max-width: 480px) {
+  .pro-cards {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .img {
+    height: 160px;
+  }
+
+  .addbtn,
+  .buybtn {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .pro h3 {
+    font-size: 14px;
+  }
+}
+
+/* -----------------------------
+   Large Screens (>= 1200px)
+------------------------------ */
+@media (min-width: 1200px) {
+  .pro-cards {
+    padding: 30px 60px;
+  }
+
+  .img {
+    height: 220px;
+  }
 }

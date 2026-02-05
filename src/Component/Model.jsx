@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Model.css";
 import { toast } from "react-toastify";
 import OtpInput from "react-otp-input";
@@ -41,6 +41,7 @@ function Model({ onHide }) {
     if (valuenum.length === 1 && parseInt(valuenum[0]) <= 5) {
       return;
     }
+       localStorage.setItem("userData", JSON.stringify(userobj));
 
     setedit(valuenum);
     setnumber(valuenum);
@@ -89,7 +90,8 @@ function Model({ onHide }) {
       let userobj = {
         name: name,
         emaildata: email,
-        password: password
+        password: password,
+         number: number
       }
 
       localStorage.setItem("userData", JSON.stringify(userobj));
@@ -104,6 +106,8 @@ function Model({ onHide }) {
   const ResendOtp = () => {
     toast.success("successfully resend otp ")
   }
+
+ 
 
 
   return (
@@ -128,7 +132,8 @@ function Model({ onHide }) {
 
                 <div className="phone-input">
                   <span className="flag">+91</span>
-                  <input type="number"
+                  {/* <input type="number" */}
+                  <input type="tel"
                     value={number}
                     placeholder="Enter Mobile Number"
                     onChange={(e) => handlechange(e.target.value)}
