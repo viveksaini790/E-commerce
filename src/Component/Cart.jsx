@@ -3,9 +3,8 @@ import { FaCartPlus } from "react-icons/fa";
 import { useNavigate ,useLocation} from 'react-router-dom';
 
 // function Cart({cartLength}) {
-function Cart(filtercartproduct) {
+function Cart() {
 
-console.log('filtercartobj in the cart',filtercartproduct)
 
   const navigate=useNavigate()
   const location=useLocation()
