@@ -1,0 +1,21 @@
+.profile-overlay {
+  position: fixed;
+  top: 150px;
+ left: 350px;
+
+  /* right: 0; */
+  /* width: 350px; */
+  /* height: 100vh; */
+ 
+  width: 500px;
+  height: 400px;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  
+}
+.content{
+  padding-left: 100px;
+  
+}
+

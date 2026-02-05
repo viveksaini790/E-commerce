@@ -2,23 +2,26 @@ import React from 'react'
 import './Header.css'
 import Model from './Model'
 import { FaUser } from "react-icons/fa";
-// import { useNavigate } from 'react-router-dom'
+
 import { useNavigate } from 'react-router-dom';
-
-
 import { useState } from 'react'
 import { toast } from 'react-toastify';
+import UserProfile from './UserProfile';
+
 function Header({hangform}) {
   const [showform,setshowform]= useState(false);
   const EmailformLocal = localStorage.getItem("userData");
   const [showPrpfile, setshowProfile]=useState(false)
 const userData = EmailformLocal ? JSON.parse(EmailformLocal) : null;
 const navigate=useNavigate()
+const [userprofile,setUserprofile] = useState(false)
 
 
-// console.log("showPrpfile",showPrpfile)
 
-// const navigate=useNavigate()
+// const profileData=  localStorage.getItem('name')
+// console.log('profiledata',profileData);
+
+
 
   const handlelogout=()=>{
     localStorage.removeItem("userData")
@@ -27,7 +30,6 @@ const navigate=useNavigate()
     setshowProfile(false)
     toast.success("successfully logout")
     
-
   }
 
   
@@ -58,9 +60,12 @@ const navigate=useNavigate()
    
    {showPrpfile && (
       <div className="profile-dropdown">
-        <p className="profile-name">
+        {/* <p className="profile-name">
           { "User Profile"}
-        </p>
+        </p> */}
+        <button className='profile-name' onClick={()=>setUserprofile(true)}>
+          User Profile</button>
+          {userprofile && <UserProfile close={() => setUserprofile(false)}  />}
         <hr />
         <button
           className="logout-btn"

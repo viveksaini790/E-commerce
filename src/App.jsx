@@ -2,8 +2,10 @@ import { Routes, Route, BrowserRouter } from "react-router-dom"
 import Home from "./Home"
 import Login from "./Component/Login"
 import Cart from "./Component/Cart"
-// import { useNavigate } from "react-router-dom"
+
+
 import Checkout from "./Component/Buy/Buy"
+
 const App = () => {
 
   
@@ -15,7 +17,8 @@ const App = () => {
           <Route path="/" element={<Home  />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login  />} />
-          <Route path="/buy" element={<Checkout  />} />
+          <Route path="/buy/:id" element={<Checkout  />} />
+        
         </Routes>
       </BrowserRouter>
 

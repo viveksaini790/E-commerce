@@ -16,7 +16,7 @@ function Home() {
   const [userData, setuserData] = useState([]);
   const [filtercategory, setfiltercategory] = useState([]);
   const [Expended, setExpended] = useState([]);
-   const [filtercartproduct,setfiltercartproduct]=useState([]);
+   //const [filtercartproduct,setfiltercartproduct]=useState([]);
 // const [filtercartproduct, setfiltercartproduct] = useState(() => {
 //   return JSON.parse(localStorage.getItem("filterCart")) || [];
 // });
@@ -35,13 +35,13 @@ function Home() {
 
   });
 
-  useEffect(()=>{
-    const filterobj=myapi.products.filter((pro1)=>
-     pro1.id == cartLength);
+  // useEffect(()=>{
+  //   const filterobj=myapi.products.filter((pro1)=>
+  //    pro1.id == cartLength);
 
-    setfiltercartproduct([...filtercartproduct, ...filterobj])
-    //  setfiltercartproduct(prev=>[...prev, ...filterobj])
-  },[cartLength])
+  //   setfiltercartproduct([...filtercartproduct, ...filterobj])
+  //   //  setfiltercartproduct(prev=>[...prev, ...filterobj])
+  // },[cartLength])
 
   const navigate=useNavigate()
 
@@ -83,7 +83,7 @@ function Home() {
 
 
   const handleAddtoCart = (id) => {
- toast.error('login profile')
+//  toast.error('login profile')
 
 
     setcartLength((pre) => {
@@ -125,7 +125,7 @@ function Home() {
 
 
       <Header />
-       <Navbar proCategory={createCategory} filtercartproduct={filtercartproduct} />
+       <Navbar proCategory={createCategory}  />
       <div className='pro-cards'>
         {filtercategory.map((item) => {
 
@@ -164,7 +164,7 @@ function Home() {
                   handleAddtoCart(item.id)
               }
               }>{cartLength.includes(item.id) ? "remove item" : "AddToCart"}</button>
-              <button className='buybtn' onClick={()=>navigate('/buy')}>Buy</button>
+              <button className='buybtn' onClick={()=>navigate(`/buy/${item.id}`)}>Buy</button>
             </div>
 
           )

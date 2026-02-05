@@ -3,7 +3,7 @@ import './Navbar.css';
 import Cart from './Cart';
 
 // function Navbar({ proCategory, cartLength }) {
-function Navbar({ proCategory, filtercartproduct }) {
+function Navbar({ proCategory, }) {
   const [active, setActive] = useState("home");
 
   const handlecategory = (cat) => {
@@ -51,7 +51,7 @@ function Navbar({ proCategory, filtercartproduct }) {
 
         {/* Cart Icon with Badge */}
         {/* <Cart  cartLength={cartLength}/> */}
-                <Cart filtercartproduct={filtercartproduct} />
+                <Cart  />
 
 
       </div>
