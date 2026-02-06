@@ -1,111 +1,191 @@
+:root {
+  --primary-color: rgb(71, 240, 175);
+  --primary-dark: rgb(74, 211, 158);
+  --white: #ffffff;
+  --black: #000000;
+  --gray-light: #e5e7eb;
+  --text-dark: #111827;
+  --border-light: #e5e7eb;
+  --accent: #3b82f6;
+  --border: #cbd5e1;
+  --bg-card: #ffffff;
+}
+
+/* =========================
+   Header Wrapper
+========================= */
 .header {
-  height: 70px;
-  padding: 0 30px;
-  background-color: #ffffff;
+  height: 72px;
+  padding: 0 32px;
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
+/* =========================
+   Header Left
+========================= */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logo img {
-  height: 60px;
-  width: auto;
+  height: 44px;
 }
 
 .logo span {
   font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
+  color: var(--text-dark);
 }
 
+/* =========================
+   Header Right
+========================= */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Login Button */
 .login-btn {
-  padding: 8px 20px;
-  border: none;
-  background-color: #251919ce;
-  color: #fff;
+  padding: 10px 22px;
+  background: var(--primary-color);
+  color: var(--text-dark);
   font-size: 14px;
-  font-weight: 500;
-  border-radius: 4px;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.25s ease;
 }
 
 .login-btn:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid;
+  background: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
+/* =========================
+   User Box
+========================= */
 .user-box {
   display: flex;
-  flex-direction: column;   /* icon ke niche name */
+  flex-direction: column;
   align-items: center;
- 
   cursor: pointer;
+  position: relative;
 }
 
 .user-icon {
-  font-size: 22px;
-  height: 50%;
-  width: 50%;
-  border: 1px solid;
+  font-size: 18px;
+  background: var(--gray-light);
+  color: var(--text-dark);
   border-radius: 50%;
   padding: 10px;
-  
+  transition: background 0.2s ease;
+}
+
+.user-box:hover .user-icon {
+  background: var(--primary-color);
 }
 
 .user-name {
+  margin-top: 6px;
   font-size: 12px;
-  margin-top: 4px;
-  color: red
+  font-weight: 500;
+  color: var(--text-dark);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* Dropdown card */
+/* =========================
+   Profile Dropdown
+========================= */
 .profile-dropdown {
   position: absolute;
-  top: 62px;
-  right: 7px;
-  width: 150px;
-  background: #fff;
-  color: #333;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-  padding: 12px;
+  top: 70px;
+  right: 32px;
+  width: 180px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 8px 0;
   z-index: 1000;
+  animation: dropdownFade 0.2s ease;
 }
 
-/* Profile text */
-.profile-name {
- font-weight: 600;
-  width: 100%;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  background: none;
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.profile-email {
-  font-size: 13px;
-  color: #666;
-  margin: 4px 0 12px;
-  word-break: break-all;
-}
-
-/* Logout button */
+/* Dropdown Buttons */
+.profile-name,
 .logout-btn {
-   font-weight: 600;
   width: 100%;
+  padding: 12px 16px;
   border: none;
-  cursor: pointer;
+  background: transparent;
+  text-align: left;
   font-size: 14px;
-  background: none;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-dark);
+  transition: background 0.2s ease;
 }
 
+.profile-name:hover {
+  background: var(--gray-light);
+}
 
+/* Logout */
+.logout-btn {
+  color: #ef4444;
+}
+
+.logout-btn:hover {
+  background: #fee2e2;
+}
+
+/* Divider */
+.profile-dropdown hr {
+  border: none;
+  height: 1px;
+  background: var(--border-light);
+  margin: 6px 0;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .user-name {
+    display: none;
+  }
+}
