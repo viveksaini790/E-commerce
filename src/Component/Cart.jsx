@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate ,useLocation} from 'react-router-dom';
-import '../Component/Cart.css'
+import './cart.css'
 
 // import Navbar from './Navbar';
 // function Cart({cartLength}) {
