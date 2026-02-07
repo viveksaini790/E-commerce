@@ -118,7 +118,7 @@ function Model({ onHide }) {
       {/* Modal Box */}
       <div className="custom-modal">
         <div className="modal-inner">
-
+ 
           {/* LEFT */}
           {!userform && (
             !otpbox ?

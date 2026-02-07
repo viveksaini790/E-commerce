@@ -1,278 +1,226 @@
-/* .pro-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 20px;
+:root {
+  --primary-color: rgb(71, 240, 175);
+  --primary-dark: rgb(74, 211, 158);
+  --white: #ffffff;
+  --black: #000000;
+  --gray-light: #f3f4f6;
+  --text-dark: #111827;
+  --text-muted: #6b7280;
+  --border-light: #e5e7eb;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.pro {
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 8px;
+/* Container to prevent conflicts */
+/* Container padding reduced for tighter look */
+.home-container {
+  padding: 1rem;
+  background-color: var(--gray-light);
+  min-height: 100vh;
+}
+
+/* Reduced min-width from 280px to 220px to fit more cards per row */
+.home-container .pro-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  gap: 1.25rem;
+  max-width: 1177px;
+  margin: 0 auto;
+}
+
+/* Card Styling - fixed height removed to allow natural content flow, 
+   but we'll tighten the padding */
+.home-container .pro-card {
+  background: var(--white);
+  border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.pro:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.pro img {
-  width: 100%;
-  height: 150px;
-  object-fit: contain;
-  transition: transform 0.4s ease; 
-}
-
-
-
-.pro:hover img {
-  transform: scale(1.15);
-}
-
-
-.decripbtn {
-  padding: 2px;
-  border: none; 
-  
-  color: #3020de;
-
-  cursor: pointer;
-}
-
-
-
-.addbtn {
-  padding: 8px 11px;
-  border: none;
-  background-color: #251919ce;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-right: 20px;
-}
-
-.addbtn:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid;
-}
-
-.buybtn {
-  padding: 8px 11px;
-  border: none;
-  background-color: #251919ce;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.buybtn:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid;
-} */
-
-
-/* -----------------------------
-   Global Reset
------------------------------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: #f8f9fa;
-}
-
-/* -----------------------------
-   Toast Responsive
------------------------------- */
-.Toastify__toast-container {
-  width: auto;
-  max-width: 360px;
-}
-
-@media (max-width: 480px) {
-  .Toastify__toast-container {
-    right: 8px;
-    left: 8px;
-    top: 10px;
-    width: auto;
-  }
-}
-
-/* -----------------------------
-   Product Cards Container
------------------------------- */
-.pro-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-/* -----------------------------
-   Product Card
------------------------------- */
-.pro {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--border-light);
+}
+
+/* Reduced image height from 200px to 150px */
+.home-container .pro-img-wrapper {
+  width: 100%;
+  height: 150px; 
+  overflow: hidden;
+  background: #f9f9f9;
+  padding: 10px; /* Adds a little breathing room for the product image */
+}
+
+/* Reduced padding in the content section */
+.home-container .pro-content {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Smaller font sizes for a more compact UI */
+.home-container .pro-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+  /* Truncate long titles to 1 line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-container .pro-description {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+.home-container .pro-footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.home-container .pro-price {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+/* Tighter action buttons */
+.home-container .pro-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+
+.home-container .pro-actions button {
+  padding: 0.5rem 0.2rem; /* Slimmer buttons */
+  font-size: 0.75rem;
+  border-radius: 6px;
+}
+/* Grid layout for responsiveness */
+  .pro-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1377px;
+  margin: 0 auto;
+}
+
+/* Card Styling */
+.pro-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
 }
 
-.pro:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+.pro-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* -----------------------------
-   Image Section
------------------------------- */
-.img {
+/* Image section */
+.pro-img-wrapper {
   width: 100%;
   height: 200px;
   overflow: hidden;
-  border-radius: 10px;
-  background: #f1f1f1;
+  background: #f9f9f9;
 }
 
 .pro-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Ensures product isn't cropped weirdly */
+  transition: scale 0.5s ease;
 }
 
-/* -----------------------------
-   Text Content
------------------------------- */
-.pro h3 {
-  font-size: 16px;
-  margin: 10px 0;
-  color: #222;
+.pro-card:hover .pro-img {
+  scale: 1.05;
 }
 
-.pro p {
-  font-size: 14px;
-  color: #555;
+/* Content area */
+.pro-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pro-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.pro-description {
+  font-size: 0.9rem;
+  color: var(--text-muted);
   line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
-.pro h4 {
-  margin: 10px 0;
-  font-size: 15px;
-  color: #0d6efd;
-}
-
-/* -----------------------------
-   Read More Button
------------------------------- */
-.decripbtn {
+.read-more-btn {
   background: none;
   border: none;
-  color: #0d6efd;
+  color: var(--primary-dark);
+  font-weight: 600;
   cursor: pointer;
-  font-size: 13px;
-  margin-left: 5px;
+  padding: 0;
+  margin-left: 4px;
 }
 
-/* -----------------------------
-   Buttons
------------------------------- */
-.addbtn,
-.buybtn {
-  padding: 10px;
-  border: none;
+/* Pricing and Buttons */
+.pro-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-light);
+  padding-top: 1rem;
+}
+
+.pro-price {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.pro-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+/* Common Button Style */
+.pro-actions button {
+  padding: 0.6rem;
   border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 8px;
-  font-size: 14px;
-  transition: all 0.3s ease;
+  border: none;
+  transition: opacity 0.2s;
 }
 
-.addbtn {
-  background-color: #198754;
-  color: #ffffff;
+.btn-cart.add {
+  background-color: var(--primary-color);
+  color: var(--text-dark);
 }
 
-.addbtn:hover {
-  background-color: #157347;
+.btn-cart.remove {
+  background-color: #fee2e2;
+  color: #ef4444;
 }
 
-.buybtn {
-  background-color: #fd7e14;
-  color: #ffffff;
+.btn-buy {
+  background-color: var(--black);
+  color: var(--white);
 }
 
-.buybtn:hover {
-  background-color: #e8590c;
-}
-
-/* -----------------------------
-   Tablet (<= 768px)
------------------------------- */
-@media (max-width: 768px) {
-  .pro-cards {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    padding: 15px;
-  }
-
-  .img {
-    height: 180px;
-  }
-
-  .pro h3 {
-    font-size: 15px;
-  }
-}
-
-/* -----------------------------
-   Mobile (<= 480px)
------------------------------- */
-@media (max-width: 480px) {
-  .pro-cards {
-    grid-template-columns: 1fr;
-    padding: 10px;
-  }
-
-  .img {
-    height: 160px;
-  }
-
-  .addbtn,
-  .buybtn {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  .pro h3 {
-    font-size: 14px;
-  }
-}
-
-/* -----------------------------
-   Large Screens (>= 1200px)
------------------------------- */
-@media (min-width: 1200px) {
-  .pro-cards {
-    padding: 30px 60px;
-  }
-
-  .img {
-    height: 220px;
-  }
+.pro-actions button:hover {
+  opacity: 0.85;
 }

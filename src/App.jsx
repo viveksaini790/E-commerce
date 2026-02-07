@@ -2,6 +2,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom"
 import Home from "./Home"
 import Login from "./Component/Login"
 import Cart from "./Component/Cart"
+import UserProfile from "./Component/UserProfile"
+
 
 
 import Checkout from "./Component/Buy/Buy"
@@ -17,6 +19,7 @@ const App = () => {
           <Route path="/" element={<Home  />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login  />} />
+          <Route path="/userProfile" element={<UserProfile/>}/>
           <Route path="/buy/:id" element={<Checkout  />} />
         
         </Routes>

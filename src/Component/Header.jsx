@@ -1,89 +1,79 @@
-import React from 'react'
-import './Header.css'
-import Model from './Model'
+import React, { useState } from "react";
+import "./Header.css";
 import { FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Model from "./Model";
 
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
-import { toast } from 'react-toastify';
-import UserProfile from './UserProfile';
+function Header() {
+  const [showform, setshowform] = useState(false);
+  const [showPrpfile, setshowProfile] = useState(false);
 
-function Header({hangform}) {
-  const [showform,setshowform]= useState(false);
+  const navigate = useNavigate();
+
   const EmailformLocal = localStorage.getItem("userData");
-  const [showPrpfile, setshowProfile]=useState(false)
-const userData = EmailformLocal ? JSON.parse(EmailformLocal) : null;
-const navigate=useNavigate()
-const [userprofile,setUserprofile] = useState(false)
+  const userData = EmailformLocal ? JSON.parse(EmailformLocal) : null;
 
+  const handlelogout = () => {
+    localStorage.removeItem("userData");
+    toast.success("Successfully logged out");
+    navigate("/");
+    setshowProfile(false);
+  };
 
-
-// const profileData=  localStorage.getItem('name')
-// console.log('profiledata',profileData);
-
-
-
-  const handlelogout=()=>{
-    localStorage.removeItem("userData")
-    navigate("/")
-    setshowform(false)
-    setshowProfile(false)
-    toast.success("successfully logout")
-    
-  }
-
-  
   return (
     <>
-   {showform && <Model  show={showform} onHide={() => setshowform(false)}/> }
-    <div className="header">
-     
-      <div className="logo">
-        <img src="/wel.webp" alt="Logo" />
-        <span>MyStore</span>
+      {showform && <Model show={showform} onHide={() => setshowform(false)} />}
+
+      <div className="header">
+        {/* Left */}
+        <div className="header-left">
+          <div className="logo">
+            <img src="/wel.webp" alt="Logo" />
+            <span>MyStore</span>
+          </div>
+        </div>
+
+        {/* Right */}
+        <div className="header-right">
+          {!userData ? (
+            <button className="login-btn" onClick={() => setshowform(true)}>
+              Login
+            </button>
+          ) : (
+            <>
+              <div
+                className="user-box"
+                onClick={() => setshowProfile(!showPrpfile)}
+              >
+                <FaUser className="user-icon" />
+                <span className="user-name">
+                  {userData.name || userData.email}
+                </span>
+              </div>
+
+              {showPrpfile && (
+                <div className="profile-dropdown">
+                  <button
+                    className="profile-name"
+                    onClick={() => navigate("/userProfile")}
+                  >
+                    User Profile
+                  </button>
+
+                  <hr />
+
+                  <button className="logout-btn" onClick={handlelogout}>
+                    Logout
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
-  
-
-    {!userData ? (
-  <button className="login-btn" onClick={() => setshowform(true)}>
-    Login
-  </button>
-) : (
-  <>
-  <div className="user-box" onClick={()=>setshowProfile(!showPrpfile)}>
-    <FaUser className="user-icon" />
-    <span className="user-name">
-      {userData.name || userData.email}
-    </span>
-  </div>
-
-   
-   {showPrpfile && (
-      <div className="profile-dropdown">
-        {/* <p className="profile-name">
-          { "User Profile"}
-        </p> */}
-        <button className='profile-name' onClick={()=>setUserprofile(true)}>
-          User Profile</button>
-          {userprofile && <UserProfile close={() => setUserprofile(false)}  />}
-        <hr />
-        <button
-          className="logout-btn"
-          onClick={handlelogout}
-        >
-          Logout
-        </button>
-      </div>
-    )}  
-  
-  </>
-)}
-
-    
-    </div>
-    
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;
