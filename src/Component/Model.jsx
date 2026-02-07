@@ -41,7 +41,6 @@ function Model({ onHide }) {
     if (valuenum.length === 1 && parseInt(valuenum[0]) <= 5) {
       return;
     }
-       localStorage.setItem("userData", JSON.stringify(userobj));
 
     setedit(valuenum);
     setnumber(valuenum);
@@ -64,6 +63,7 @@ function Model({ onHide }) {
       return;
     }
     setuserform(true)
+    
     toast.success("otp successfully submit")
   }
 
