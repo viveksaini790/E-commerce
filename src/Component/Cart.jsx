@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate ,useLocation} from 'react-router-dom';
 import './cart.css'
-
+import { IoMdArrowRoundBack } from "react-icons/io";
 // import Navbar from './Navbar';
 // function Cart({cartLength}) {
 function Cart() {
@@ -15,6 +15,7 @@ function Cart() {
       "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
       "category": "beauty",
       "price": 9.99,
+      "cl":1,
       "discountPercentage": 10.48,
       "rating": 2.56,
       "stock": 99,
@@ -1817,49 +1818,28 @@ const [purchaseDec , setpurchaseDec] = useState(0)
   const location=useLocation()
   const data = localStorage.getItem("cartItems");
       const parsed = JSON.parse(data) || [];
-
+// console.log('cart dadaaaa',parsed)
         
-        // const [cartLength, setcartLength] = useState(() => {
-        //   const data = localStorage.getItem("cartItems");
-        //   if (data) {
-        //     const parsed = JSON.parse(data);
-        //     return parsed;
-        //   }
-          
-        //   else {
-        //     return [];
-        //   }
-      
-        // });
-  // const [CartProduct,setCartProduct]=useState([]);
-
-
  useEffect(() => {
 const data = localStorage.getItem("cartItems");
       const parsed = JSON.parse(data) || [];
-      console.log("parseddas",parsed,userData)
+    //  console.log("parseddas",parsed,userData)
 
   const filterdataItem=userData.filter(item=>parsed.includes(item.id))
-  console.log("filterdataItem",filterdataItem)
+ // console.log("filterdataItem",filterdataItem)
      setfiltercategory(filterdataItem)
   
   }, [userData]); 
 
-// const CartremoveId=(id)=>{
-//     setcartLength((pre) => {
-//       const cartarray =  pre.filter( (item)=>item!== id )
-//       localStorage.setItem("cartItems", JSON.stringify(cartarray));
-//        return cartarray;
-//     })
-//   console.log('cart id clicked')
-//   }
-
-const CartremoveId=(id)=>{
+const handleRemove=(id)=>{
     setfiltercategory((pre) => {
       const cartarray =  pre.filter( (item)=>item.id!== id )
-      localStorage.setItem("cartItems", JSON.stringify(cartarray));
+      const dataID=cartarray.map((item)=>item.id)
+     // console.log("cartarray",dataID)
+      localStorage.setItem("cartItems", JSON.stringify(dataID));
        return cartarray;
     })
+    
   console.log('cart id clicked')
   }
 
@@ -1873,11 +1853,30 @@ const inc=(id)=>{
 const dec=()=>{
 setpurchaseDec(purchaseDec-1)
 }
+const handleBackCrt=()=>{
+  navigate('/')
+}
+// console.log('filtercatergoryaaa',filtercategory)
 
   return (
     <>
-    
+    <button className='cartBackbtn' onClick={handleBackCrt}>
+      <IoMdArrowRoundBack style={{height:"30px",width:"30px"}} />
+      </button>
+      
+
+{/* 
+{parsed.length === 0 ? (
+  <div>Cart not found</div>
+) : (
+  <div>Hello Vivek</div>
+)} */}
+{parsed.length === 0 && (
+  <div className='cartempt'>Cart is empty</div>
+  )}
+
  <div className='gemini-cart-wrapper'>
+  
   <div className='gemini-cart-list'>
     {filtercategory.map((item) => (
       <div key={item.id} className="gemini-cart-item">
@@ -1902,7 +1901,7 @@ setpurchaseDec(purchaseDec-1)
 
         {/* Action Buttons */}
         <div className="gemini-item-actions">
-          <button className="gemini-buy-btn" onClick={() => handleBuy(item.id)}>Buy</button>
+          <button className="gemini-buy-btn" onClick={()=>navigate(`/buy/${item.id}`)}>Buy</button>
           <button className="gemini-remove-btn" onClick={() => handleRemove(item.id)}>
             <i className="fa-solid fa-trash"></i> {/* Optional: use an 'X' or Trash icon */}
             ×
@@ -1911,10 +1910,12 @@ setpurchaseDec(purchaseDec-1)
       </div>
     ))}
   </div>
-
-  <div className="gemini-cart-footer">
+  {parsed.length>0  &&(
+     <div className="gemini-cart-footer">
     <button className="gemini-buy-all-btn">Buy All</button>
   </div>
+  )}
+  
 </div>
     </>
   )
@@ -1922,6 +1923,4 @@ setpurchaseDec(purchaseDec-1)
   
 export default Cart
 
-  // <button onClick={()=>
-        // {cartLength.includes(item.id) ? CartremoveId(item.id) : " "}
-        // }>remove</button>
+ 

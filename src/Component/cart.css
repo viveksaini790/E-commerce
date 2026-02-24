@@ -141,3 +141,78 @@
 .gemini-buy-all-btn:hover {
   opacity: 0.9;
 }
+
+.cartBackbtn{
+  margin: 20px;
+  position: fixed;
+  cursor: pointer;
+  background: none;
+  border: none;
+ 
+}
+
+.cartempt {
+  width: min(90%, 320px);
+  min-height: 140px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background: #e8f5e9;
+  color: #1b5e20;
+
+  border: 1px solid #c8e6c9;
+  border-radius: 14px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Hover effect (desktop) */
+.cartempt:hover {
+  background: #2e7d32;
+  color: #ffffff;
+  transform: translate(-50%, -55%) scale(1.04);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .cartempt {
+    font-size: 15px;
+    padding: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .cartempt {
+    width: 92%;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+}
+
+.Backbtn{
+   margin: 20px;
+  position: fixed;
+  cursor: pointer;
+  background: none;
+  border: none;
+  /* position:absolute; */
+ margin-top: 50px;
+}

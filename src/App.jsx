@@ -5,6 +5,7 @@ import Cart from "./Component/Cart"
 import UserProfile from "./Component/UserProfile"
 
 
+import Ordercart from "./Component/Ordercart"
 
 import Checkout from "./Component/Buy/Buy"
 
@@ -20,7 +21,8 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login  />} />
           <Route path="/userProfile" element={<UserProfile/>}/>
-          <Route path="/buy/:id" element={<Checkout  />} />
+          <Route path="/buy/:id" element={<Checkout />} />
+          <Route path="/orderview" element={<Ordercart/>} />
         
         </Routes>
       </BrowserRouter>

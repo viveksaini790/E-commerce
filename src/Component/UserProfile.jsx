@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css';
 import UpdateProfile from './Model/UpdateProfile';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [showEdit, setshowEdit]=useState(false)
 
+  const navigate=useNavigate()
   useEffect(() => {
     // Attempt to get data from localStorage
     const storedData = localStorage.getItem('userData');
@@ -14,15 +16,21 @@ const Profile = () => {
       setUser(JSON.parse(storedData));
     }
   }, []);
-  console.log("caekke")
+
+
+  // console.log("caekke")
 
   if(user==null){
     return <h2>loading</h2>
   }
 
   const handleEdit=()=>{
-    console.log("called dajsda")
+    // console.log("called dajsda")
     setshowEdit(!showEdit)
+  }
+
+  const handleCancle=()=>{
+    navigate("/")
   }
   return (
     <>
@@ -58,12 +66,13 @@ const Profile = () => {
       </div>
       <div className="detail-row">
         <span className="detail-label">Password</span>
-        <span className="detail-value">••••••••</span> {/* Security practice: Masking password */}
+        <span className="detail-value">{user.password}</span> {/* Security practice: Masking password */}
       </div>
 
       <button className="edit-button" onClick={handleEdit}>
         <span className="edit-icon">✎</span> Edit Profile
       </button>
+      <button className='cancle-button' onClick={handleCancle}>Cancle</button>
     </div>
   </div>
 </div>

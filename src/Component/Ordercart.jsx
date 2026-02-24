@@ -1,16 +1,12 @@
- import React from 'react';
-import Header from './Component/Header';
-import Navbar from './Component/Navbar';
-import { useState, useEffect, } from 'react';
-import './home.css';
-import { toast, ToastContainer } from 'react-toastify';
-// import Model from './Component/Model';
-import { useNavigate } from 'react-router-dom';
 
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import './cart.css'
+import { IoMdArrowRoundBack } from "react-icons/io";
 
+function Ordercart() {
 
-function Home() {
-const myapi = {
+  const myapi = {
   
   Products: [
     {
@@ -19,6 +15,7 @@ const myapi = {
       "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
       "category": "beauty",
       "price": 9.99,
+      "cl":1,
       "discountPercentage": 10.48,
       "rating": 2.56,
       "stock": 99,
@@ -1811,160 +1808,66 @@ const myapi = {
     }
   ],
  }
-  const [userData, setuserData] = useState([]);
-  const [filtercategory, setfiltercategory] = useState([]);
-  const [Expended, setExpended] = useState([]);
-   //const [filtercartproduct,setfiltercartproduct]=useState([]);
-// const [filtercartproduct, setfiltercartproduct] = useState(() => {
-//   return JSON.parse(localStorage.getItem("filterCart")) || [];
-// });
-
-
-
+ const [fordata , setfordata] =useState(myapi?.Products)
+  const [filterId , setfilterId] =useState([])
+const navigate=useNavigate();
   
-  const [cartLength, setcartLength] = useState(() => {
-    const data = localStorage.getItem("cartItems");
-    if (data) {
-      const parsed = JSON.parse(data);
-      return parsed;
-    }
-    
-    else {
-      return [];
-    }
+// useEffect(()=>{
+//    const viewId= localStorage.getItem('Buyitems')
+//  const parsed = JSON.parse(viewId) || []
+ 
+// console.log("view=",parsed)
+// const filterdata=fordata.filter( item=>parsed.includes(item.id) )
+// console.log('filterdata',filterdata)
 
-  } );
+// setfilterId(filterdata)
+// console.log('filterid',filterId)
 
-// const { id } = useParams();
-//  console.log('url id=',id)
+// },[fordata])
+useEffect(() => {
+  const viewId = localStorage.getItem('Buyitems')
+  const parsed = viewId ? JSON.parse(viewId) : []
 
-  const navigate=useNavigate()
-
-  useEffect(() => {
-    setuserData(myapi.Products)
-    setfiltercategory(myapi.Products)
+  const filterdata = fordata.filter(item =>
+    parsed.map(Number).includes(item.id)
+  )
+// console.log('filterdata',filterdata)
+  setfilterId(filterdata)
+}, [fordata])
+ 
+const handleBackCrt=()=>{
+  navigate('/')
+}
   
-  }, [])
-  
-
-  const createCategory = (cate) => {
-    if (cate == 'home') {
-      setfiltercategory(userData)
-    } else {
-      const result = userData.filter((item) =>
-        item.category == cate
-      )
-      setfiltercategory(result);
-    }
-  }
-  const toggleReadMore = (id) => {
-    // setreadmore(true)
-    setExpended([...Expended, id]);
-  };
-
-  const toggleReadless = (id) => {
-    setExpended((iem) =>
-      iem.filter((item) => item != id)
-    )
-  }
-
-  // console.log("expnded", Expended)
-
-
-  const handleAddtoCart = (id) => {
-
-    setcartLength((pre) => {
-      const cartarray = [...pre, id]
-      localStorage.setItem("cartItems", JSON.stringify(cartarray));
-      return cartarray;
-    })
-
-  }
-
-  const handleremoveId=(id)=>{
-    setcartLength((pre) => {
-      const cartarray =  pre.filter((item)=>item!=id)
-      localStorage.setItem("cartItems", JSON.stringify(cartarray));
-      return cartarray;
-    })
-
-  }
-
-  // console.log("cartLength", cartLength)
-
-   if (!userData.length) {
-    return <div>Loading...</div>;
-  }
-
-  // const { id } = useParams();
-  // const parms= {id}
-  // localStorage.setItem("Buyitems",JSON.stringify({id}))
-  
-
   return (
-    <>
-
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        pauseOnHover
-        draggable
-        theme="colored"
-      />
-
-
-      <Header />
-       <Navbar proCategory={createCategory}  />
-      <div className='home-container'>
-  <div className='pro-cards'>
-    {filtercategory.map((item) => {
-      const isExpanded = Expended.includes(item.id);
-      const isInCart = cartLength.includes(item.id);
-
-      return (
-        <div className="pro-card" key={item.id}>
-          <div className='pro-img-wrapper'>
-            <img src={item?.images?.[0]} alt={item.title} className='pro-img' />
-          </div>
-
-          <div className="pro-content">
-            <h3 className="pro-title">{item.title}</h3>
-            
-            <p className="pro-description">
-              {isExpanded ? item.description : `${item.description.slice(0, 60)}...`}
-              <button 
-                onClick={() => isExpanded ? toggleReadless(item.id) : toggleReadMore(item.id)} 
-                className='read-more-btn'
-              >
-                {isExpanded ? " Show Less" : " Read More"}
-              </button>
-            </p>
-
-            <div className="pro-footer">
-              <span className="pro-price">${item.price}</span>
-              <div className="pro-actions">
-                <button 
-                  className={`btn-cart ${isInCart ? 'remove' : 'add'}`} 
-                  onClick={() => isInCart ? handleremoveId(item.id) : handleAddtoCart(item.id)}
-                >
-                  {isInCart ? "Remove" : "Add to Cart"}
-                </button>
-                <button className='btn-buy' onClick={() => navigate(`/buy/${item.id}`)}>
-                  Buy Now
-                </button>
-              </div>
-            </div>
-          </div>
+ <>
+ <button className='Backbtn' onClick={handleBackCrt}>
+      <IoMdArrowRoundBack style={{height:"30px",width:"30px"}} />
+      </button>
+    <div>Ordercart</div>
+   
+        {filterId.map((item) => (
+          <div className='gemini-cart-wrapper' key={item.id}> 
+      <div key={item.id} className="gemini-cart-item">
+        {/* Product Image */}
+        <div className="gemini-item-img-container">
+          <img src={item.thumbnail} alt={item.title} />
         </div>
-      );
-    })}
-  </div>
-</div>
-    </>
+
+        {/* Product Details */}
+        <div className="gemini-item-details">
+          <span className="gemini-item-id">ID: {item.id}</span>
+          <h4 className="gemini-item-price">₹{item.price}</h4>
+          <h3 className="gemini-item-title">{item.title}</h3>
+          <p className="gemini-item-desc">{item.description}</p>
+        </div>
+          
+        </div>
+     </div>
+     ))}
+ 
+ </>
   )
 }
 
-export default Home
+export default Ordercart

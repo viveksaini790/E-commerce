@@ -103,6 +103,7 @@
   align-items: center;
   gap: 8px;
   transition: transform 0.2s, background 0.2s;
+  float: left;
 }
 
 .user-profile-view .edit-button:hover {
@@ -128,4 +129,26 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+.cancle-button{
+    margin-top: 30px;
+  background: var(--primary-dark);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, background 0.2s;
+  float:right;
+}
+
+.cancle-button:hover{
+    background: var(--primary-color);
+  color: var(--text-dark);
+  transform: translateY(-2px);
 }

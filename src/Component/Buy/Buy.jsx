@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Buy.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 
+import { useParams } from "react-router-dom";
 
 function Checkout() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState( {
     name: "",
     phone: "",
     state: "",
@@ -18,10 +19,14 @@ function Checkout() {
     address: "",
     coupon: "",
     agree: false
-  });
+  } );
   const navigator = useNavigate();
   const [thankyou, setthankyou] = useState(false)
-  const [numbtn,setnumbtn] = useState(false)
+  const [wish,setwish] = useState(false)
+
+const [ buyreset, setbuyreset] = useState(false)
+ const [ UpdateCancle, setUpdateCancle]=useState(false)
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -51,22 +56,51 @@ function Checkout() {
     setForm({...form, alternate:value});
     return;
   }
+  if(form.address.length>0){
+    setbuyreset(true)
+  }
+ 
 
     setForm({
       ...form,
       [name]: type === "checkbox" ? checked : value
-    });
+    }); // if(name=== "address"){
+  //   if(value.length >0){
+  //     setbuyreset(true)
+  //   }
+  //   else if (value.length ===0){
+  //     setbuyreset(false)
+  //   }
+  // }
 
-    //   let valuenum = value.replace(/[^0-9]/g, "");
-    // if (valuenum.length > 10) return;
+  //  if(name === "address"){
+  //   if(value.length>=0){
+  //     const handleReset=()=>{
 
-    // if (valuenum.length === 1 && parseInt(valuenum[0]) <= 5) {
-    //   return;
-    // }
-  
-
+  //     }
+  //     console.log(
+  //       'hello coder what is this'
+  //     )
+  //   }
+  //  }
 
 };
+
+const { id } = useParams();
+console.log(
+  'url id =',id
+)
+//  localStorage.setItem("Buyitems",JSON.stringify([id]))
+
+
+// useEffect(() => {
+//   if (form.address.length > 0 && form.name.length>0) {
+//     setbuyreset(true);
+//   } else {
+//     setbuyreset(false);
+//   }
+// }, [form]);
+
 
 const handleSave = (value) => {
   //  console.log("Saved Address:", form);
@@ -96,38 +130,126 @@ else if (form.phone.length !== 10){
   else if (!form.landmark) {
     toast.error("landmark is required");
   }
-  else if (!form.address) {
+  else if (!form.address ) {
     toast.error("Address is required");
+   
   }
   // else if (!form.coupon) {
   //   toast.error("coupon is required");
   // }
-  else if (!form.agree) {
-    toast.error("agree is required");
-  }
+  // else if (!form.agree) {
+  //   toast.error("agree is required");
+  // }
 
   else {
 
-    toast.success("Address Saved!");
+    toast.success("Address Saved");
+   
+    // setwish(true)
+    // console.log('what is this')
+    if( true){
+       setwish(true && wishdata)
+      
+  console.log('vivek this is work')
+
+    }
+  
+
+    let Buyobj={
+      name:form.name,
+      phone:form.phone,
+      state:form.state,
+      district:form.district,
+      pincode:form.pincode,
+      alternate:form.alternate,
+      landmark:form.landmark,
+       address:form.address
+
+    }
+    localStorage.setItem("BuyData",JSON.stringify(Buyobj));
+
   }
-
-
-
 };
+
+const wishdata=localStorage.getItem("BuyData")
+const readwish=JSON.parse(wishdata)
+// console.log('readwish',readwish)
+
+const handledit=()=>{
+  console.log(
+    'handleedit callled'
+  )
+   setwish(false)
+   setUpdateCancle(true)
+  //  setForm({...form})
+}
+
+
+const handleReset=( )=>{
+//  setForm(  handleChange.value.length===0)
+setForm( 
+  {
+    name: "",
+    phone: "",
+    state: "",
+    district: "",
+    pincode: "",
+    alternate: "",
+    landmark: "",
+    address: "",
+    coupon: "",
+    agree: false
+  }
+)
+}
+
+const handleCancle=()=>{
+console.log('cancle called')
+setwish(true)
+setForm(readwish)
+}
+
+// const handleCheckout = () => {
+//   if (!form.agree) {
+//     toast.error("Please agree to terms before payment");
+//     return;
+//   }
+//   toast.success("Proceeding to Checkout...");
+//   setthankyou(true)
+//   // setthankyou()
+//  localStorage.setItem("Buyitems",JSON.stringify([id]))
+//   setTimeout(() => {
+//     navigator("/")
+
+//   }, 3000);
+
+// };
+
 
 const handleCheckout = () => {
   if (!form.agree) {
     toast.error("Please agree to terms before payment");
     return;
   }
-  toast.success("Proceeding to Checkout...");
-  setthankyou(true)
-  setTimeout(() => {
-    navigator("/")
 
+  toast.success("Proceeding to Checkout...");
+  setthankyou(true);
+
+  // 1️⃣ Pehle localStorage se data nikalo
+  const oldItems = JSON.parse(localStorage.getItem("Buyitems")) || [];
+
+  // 2️⃣ Duplicate id se bachne ke liye check
+  if (!oldItems.includes(id)) {
+    oldItems.push(id);
+  }
+
+  // 3️⃣ Wapas localStorage me save karo
+  localStorage.setItem("Buyitems", JSON.stringify(oldItems));
+
+  setTimeout(() => {
+    navigator("/");
   }, 3000);
 };
-
 return (
 
   <>
@@ -155,7 +277,10 @@ return (
 
     <div className="gemini-checkout-layout">
       {/* LEFT FORM: Address Details */}
-      <div className="gemini-address-box">
+     
+      {! wish ? 
+      (
+        <div className="gemini-address-box">
         <div className="gemini-form-row">
           <div className="gemini-input-group">
             <label>Name:</label>
@@ -207,10 +332,32 @@ return (
           <textarea name="address" placeholder="Enter Address" value={form.address} onChange={handleChange} />
         </div>
 
+
         <div className="gemini-save-container">
           <button type="button" className="gemini-save-btn" onClick={handleSave}>Save</button>
         </div>
+        { buyreset && 
+        <button onClick={handleReset} >reset</button>
+        }
+        
+        { UpdateCancle &&
+          <button onClick={handleCancle} > Cancle</button>
+        }
       </div>
+      ) :
+   ( <div   className="gemini-address-box" >
+          <h2>Select Address </h2>
+        <div style={{height:"auto", width:'500px', border:'2px solid'}}> 
+          <h3>Name= {readwish.name}</h3>
+<p>Phone= {readwish.phone}</p>
+<p>Address= {readwish.address}</p>
+          <button onClick={handledit}>edit</button>
+        </div>
+    
+           </div> )
+    }
+
+
 
       {/* RIGHT BOX: Payment & Summary */}
       <div className="gemini-payment-box">

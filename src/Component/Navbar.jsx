@@ -3,7 +3,13 @@ import "./Navbar.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 
+
+
 function Navbar({ proCategory }) {
+
+ 
+
+
   const [active, setActive] = useState("home");
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,6 +74,9 @@ function Navbar({ proCategory }) {
           )}
         </div>
       )}
+
+ 
+
     </div>
   );
 }
