@@ -14,7 +14,7 @@ const Profile = () => {
       setUser(JSON.parse(storedData));
     }
   }, []);
-  console.log("caekke")
+ 
 
   if(user==null){
     return <h2>loading</h2>
