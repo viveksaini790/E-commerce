@@ -226,6 +226,10 @@
   margin-bottom: 0;
 }
 
+.passinput::-ms-reveal,
+.passinput::-ms-clear {
+  display: none;
+}
 /* ===== Eye Icon ===== */
 .icaneye {
   cursor: pointer;

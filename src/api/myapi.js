@@ -1,13 +1,4 @@
-
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './cart.css'
-import { IoMdArrowRoundBack } from "react-icons/io";
-import './ordercart.css'
-
-function Ordercart() {
-
-  const myapi = {
+const myapi = {
   
   Products: [
     {
@@ -16,7 +7,6 @@ function Ordercart() {
       "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
       "category": "beauty",
       "price": 9.99,
-      "cl":1,
       "discountPercentage": 10.48,
       "rating": 2.56,
       "stock": 99,
@@ -1809,84 +1799,5 @@ function Ordercart() {
     }
   ],
  }
- const [fordata , setfordata] =useState(myapi?.Products)
-  const [filterId , setfilterId] =useState([])
-const navigate=useNavigate();
-  const [ndata,setndata]=useState()
 
-useEffect(() => {
-  const viewId = localStorage.getItem('Buyitems')
-  const parsed = viewId ? JSON.parse(viewId) : []
-setndata(parsed)
-  const filterdata = fordata.filter(item =>
-    parsed.map(Number).includes(item.id)
-  )
-
-console.log('filterdata dsfdf',filterdata)
-  setfilterId(filterdata)
-}, [fordata])
-const handleBackCrt=()=>{
-  navigate('/')
-}
-
-const handleremove=(cat)=>{
-   
-   setfilterId((res)=>{
-    const result=res.filter((item)=>item.id!==cat)
-    // console.log('result',result)
-    const dataid=result.map((ditem)=>ditem.id)
-    localStorage.setItem("Buyitems",JSON.stringify(dataid))
-    return result;
-   })
-}
-const resid=localStorage.getItem('Buyitems')
-console.log('resid',resid)
-const parese2=JSON.parse(resid)
-console.log('parse2=',parese2)
-  //  console.log('ndata length vivek',{ndata,length})
-  return (
- <>
- <button className='cartBackbtn' onClick={handleBackCrt}>
-      <IoMdArrowRoundBack style={{height:"30px",width:"30px"}} />
-      </button>
-
-      {parese2.length===0 && (
-   <div className='mainEmpty'>
-  <div className='cartempt'>Data Not Found ?</div>
-  </div>
-  )}
-   
-
-    
-         <div className='gemini-cart-wrapper'> 
-        {filterId.map((item) => (
-          <div className='gemini-cart-wrapper' key={item.id}> 
-      <div key={item.id} className="gemini-cart-item">
-        {/* Product Image */}
-        <div className="gemini-item-img-container">
-          <img src={item.thumbnail} alt={item.title} />
-        </div>
-
-        {/* Product Details */}
-        <div className="gemini-item-details">
-          <span className="gemini-item-id">ID: {item.id}</span>
-          <h4 className="gemini-item-price">₹{item.price}</h4>
-          <h3 className="gemini-item-title">{item.title}</h3>
-          <p className="gemini-item-desc">{item.description}</p>
-          <button onClick={()=>handleremove(item.id)}>
-        <i className="fa-solid fa-trash"></i> {/* Optional: use an 'X' or Trash icon */}
-            ×
-          </button>
-        </div>
-          
-        </div>
-     </div>
-     ))}
-  </div> 
-  
- 
- </>
-  )
-}
-
-export default Ordercart
+ export default myapi;

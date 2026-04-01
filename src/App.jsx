@@ -3,7 +3,9 @@ import Home from "./Home"
 import Login from "./Component/Login"
 import Cart from "./Component/Cart"
 import UserProfile from "./Component/UserProfile"
-
+import Logic from "./Component/Logic"
+import Header from "./Component/Header"
+import Footer from "./Component/Footer"
 
 import Ordercart from "./Component/Ordercart"
 
@@ -15,8 +17,11 @@ const App = () => {
   
   return (
     <>
+    {/* <Logic/> */}
       <BrowserRouter>
-        <Routes>
+      <Header/>
+        {/* <div style={{height:"500px"}}> */}
+          <Routes>
           <Route path="/" element={<Home  />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login  />} />
@@ -25,6 +30,8 @@ const App = () => {
           <Route path="/orderview" element={<Ordercart/>} />
         
         </Routes>
+        {/* </div> */}
+        <Footer/>
       </BrowserRouter>
 
     </>

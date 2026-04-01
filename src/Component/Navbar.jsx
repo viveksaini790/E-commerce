@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 
-
+import myapi from "../api/myapi";
 
 function Navbar({ proCategory }) {
 
@@ -13,21 +13,30 @@ function Navbar({ proCategory }) {
   const [active, setActive] = useState("home");
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [cartItems, setCartItems] = useState([]);
   const data = localStorage.getItem("cartItems");
   const parsed = JSON.parse(data) || [];
+    // const [filtercategory, setfiltercategory] = useState(myapi?.Products);
+
+    // const [truefilter, settrue]= useState(false)
 
   const handlecategory = (cat) => {
     setActive(cat);
     proCategory(cat);
   };
 
-  console.log("caledad l0oca")
+ 
+//      const handlevalue=(e)=>{
+//     console.log('the value',e)
+
+// proCategory(e)
+  
+//   }
+ 
+ 
 
   return (
     <div className="navbar">
-      {/* Scrollable category buttons */}
+   
       <div className="navbar-scroll">
         <button
           className={active === "home" ? "active" : ""}
@@ -64,13 +73,17 @@ function Navbar({ proCategory }) {
           Groceries
         </button>
       </div>
-
+    
+{/* <div className="search-box">
+    <div className="search-icon">🔍</div>
+    <input type="text" placeholder="Search..." onChange={(e)=>handlevalue(e.target.value)} />
+</div> */}
       {/* Cart Icon */}
       {location.pathname === "/" && (
         <div className="cart-container" onClick={() => navigate("/cart")}>
           <FaCartPlus className="cartstyle" />
           {parsed.length > 0 && (
-            <span className="cart-badge">{parsed.length}</span>
+             <span className="cart-badge">{parsed.length}</span>
           )}
         </div>
       )}

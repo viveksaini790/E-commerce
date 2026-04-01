@@ -134,19 +134,11 @@ else if (form.phone.length !== 10){
     toast.error("Address is required");
    
   }
-  // else if (!form.coupon) {
-  //   toast.error("coupon is required");
-  // }
-  // else if (!form.agree) {
-  //   toast.error("agree is required");
-  // }
 
   else {
 
     toast.success("Address Saved");
-   
-    // setwish(true)
-    // console.log('what is this')
+ 
     if( true){
        setwish(true && wishdata)
       
@@ -225,7 +217,7 @@ setForm(readwish)
 
 // };
 
-
+if(handleSave){ }
 const handleCheckout = () => {
   if (!form.agree) {
     toast.error("Please agree to terms before payment");
@@ -250,6 +242,8 @@ const handleCheckout = () => {
     navigator("/");
   }, 3000);
 };
+
+
 return (
 
   <>
@@ -345,7 +339,8 @@ return (
         }
       </div>
       ) :
-   ( <div   className="gemini-address-box" >
+   (
+     <div   className="gemini-address-box" >
           <h2>Select Address </h2>
         <div style={{height:"auto", width:'500px', border:'2px solid'}}> 
           <h3>Name= {readwish.name}</h3>
@@ -354,7 +349,9 @@ return (
           <button onClick={handledit}>edit</button>
         </div>
     
-           </div> )
+           </div>
+            
+          )
     }
 
 

@@ -6,6 +6,7 @@
   --gray-bg: #f8f9fa;
   --border-light: #e5e7eb;
   --text-dark: #111827;
+  --vishal:rgb(898, 240, 175)
 }
 
 .gemini-checkout-container {
@@ -14,6 +15,8 @@
   padding: 20px;
   background-color: var(--gray-bg);
   min-height: 100vh;
+  border: 2px solid;
+  margin-top: 90px;
 }
 
 .gemini-back-btn {
@@ -41,6 +44,7 @@
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  
 }
 
 /* Ensure the payment box stays a fixed proportional size */

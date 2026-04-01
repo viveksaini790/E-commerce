@@ -1,76 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
-// import { FaUser } from "react-icons/fa";
-// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Model from "./Model";
 import { IoIosArrowDropdown } from "react-icons/io";
 import Cart from "./Cart";
+import { useLocation } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-import { toggleProfile, logoutUser } from "../Redux/userSlice";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-// import { useSelector, useDispatch } from "react-redux";
-// import { increment, decrement } from "../Redux/counterSlice";
 
-
-function Header() {
+function Header({proCategory}) {
   const [showform, setshowform] = useState(false);
-  const [showprofile, setshowProfile] = useState(false);
+  const [showPrpfile, setshowProfile] = useState(false);
+  const location=useLocation();
 
-  //  const count = useSelector((state) => state.counter.value);
-  // const dispatch = useDispatch();
+  console.log("location",location.pathname)
 
   const navigate = useNavigate();
 
   const EmailformLocal = localStorage.getItem("userData");
   const userData = EmailformLocal ? JSON.parse(EmailformLocal) : null;
-  const [dropdown , setdropdown] = useState(false);
-  // const [purchaseDataId, setpurchaseDataId]= useState('')
-   const [purchaseDataId, setpurchaseDataId]= useState([])
-//  const [purchaseDataId, setpurchaseDataId] =useState(()=>{
-  //  const data=localStorage.getItem('BuyItems')
-  //  if(data){
-  //   const parsed= JSON.parse(data)
-  //   return parsed;
-  //  }
-  //  else{
-  //   return[]
-  //  }
-// })
+  // const [dropdown , setdropdown] = useState(false);
+ 
+ 
+  //  const [purchaseDataId, setpurchaseDataId]= useState([])
+
   const handlelogout = () => {
     localStorage.removeItem("userData");
     toast.success("Successfully logged out");
     navigate("/");
     setshowProfile(false);
   };
-  
-  // const handleOrder=()=>{
-  //   console.log('called drowdan')
-  // setpurchaseDataId(purchasedataId)
-  // }
 
-  // const purchaseId=  localStorage.getItem("Buyitems")
-  //     const purchasedataId=JSON.parse(purchaseId)
+  
+
 const purchaseId = localStorage.getItem("Buyitems");
 const purchasedataId = purchaseId ? JSON.parse(purchaseId) : [];
 
-    const dispatch = useDispatch();
-  // const navigate = useNavigate();
-
-  // const { pserData, showProfile } = useSelector(
-   const { pserData, showProfile } = useSelector(
-    (state) => state.user
-  );
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/login");
-  };
-
-  // if (!userData) return null;
+  console.log("showprifile",showPrpfile)
 
   return (
     <>
@@ -80,8 +48,8 @@ const purchasedataId = purchaseId ? JSON.parse(purchaseId) : [];
         {/* Left */}
         <div className="header-left">
           <div className="logo">
-            <img src="/wel.webp" alt="Logo" />
-            <span>MyStore</span>
+            <img src="/aurra.img.png" alt="Logo" />
+            <span></span>
           </div>
         </div>
 
@@ -93,98 +61,53 @@ const purchasedataId = purchaseId ? JSON.parse(purchaseId) : [];
             </button>
           ) : (
             <>
-              {/* <div
+              <div
                 className="user-box"
-                onClick={() => setshowProfile(!showPrpfile)}
+                onClick={() => {
+                  console.log("called headd ")
+                  setshowProfile(!showPrpfile)
+                }}
               >
                 <FaUser className="user-icon" />
                 <span className="user-name">
-                  {userData.name || userData.email}
+                  {userData.name || userData.emaildata}
+                   
                 </span>
               </div>
 
-              {showPrpfile && (
-                <div className="profile-dropdown">
-                  <button
-                    className="profile-name"
+                <div className={`profile-dropdown${showPrpfile?"activedata":""}`}>
+                  <h3>Welcome</h3>
+         <div className="close-btn" onClick={() => setshowProfile(!showPrpfile)}> ✖  </div>
+ 
+                  <button 
+                     className={location.pathname=='/userProfile'?"activetab":""}
                     onClick={() => navigate("/userProfile")}
                   >
-                    User Profile
+                    <FaUser className="user-icon" /> My Account
                   </button>
 
+                 
+                  <button 
+                  className={location?.pathname=='/'?"activetab":""}
+                  onClick={()=> navigate("/")}>
+                    Home</button>
+                  <button onClick={()=> navigate('/orderview')}>My Order</button>
+                  <button>About</button>
+                  <button>Contact</button>
+                  <button>Services</button>
+                  <button>FAQ's</button>
                   <hr />
-
-                  <button className="logout-btn" onClick={handlelogout}>
+                 <button className="logout-btn" onClick={handlelogout}>
                     Logout
                   </button>
                 </div>
-              )} */}
-
- <div
-        className="user-box"
-        onClick={() => dispatch(toggleProfile())}
-      >
-        <FaUser className="user-icon" />
-        <span className="user-name">
-          {userData.name || userData.email}
-        </span>
-      </div>
-
-      {showProfile && (
-        <div className="profile-dropdown">
-          <button
-            className="profile-name"
-            onClick={() => navigate("/userProfile")}
-          >
-            User Profile
-          </button>
-
-          <hr />
-
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      )}
-
+         
             </>
           )
           }
 
-             <button onClick={()=>setdropdown(!dropdown)} className="dropbtn">
-           <IoIosArrowDropdown className="icondropdown" />
- </button>
- 
-{  dropdown && 
-<div  className="dropdown-wrapper  "> 
-
- <div className={`side-menu ${dropdown ? "active" : ""}`}>
-        <button className="close-btn" onClick={() => setdropdown(false)}>
-          ✖
-        </button>
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Services</li>
-          <li>Contact</li>
-          {/* <li onClick={handleOrder}>PurchaseId={purchaseDataId}</li> */}
-          <li>
-  PurchaseId = {purchaseDataId.join(", ")}
-</li>
-          <li onClick={()=>navigate('/orderview')}>My Order </li>
-        </ul>
-      </div>
-</div>
-}
-
         </div>
 
-         {/* <div>
-      <h2>Count: {count}</h2>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
-    </div>
-   */}
       </div>
     </>
   );

@@ -11,10 +11,13 @@
 .user-profile-view.profile-container {
   max-width: 800px;
   margin: 40px auto;
+  margin-top: 100px;
   padding: 30px;
   background: var(--white);
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); */
+   box-shadow: 0 10px 25px rgba(96, 114, 218, 0.621);
+    /* box-shadow: 0 10px 25px rgba(100, 235, 16, 0.992); */
   font-family: 'Inter', sans-serif;
 }
 

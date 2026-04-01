@@ -186,8 +186,8 @@ function Model({ onHide }) {
                     textAlign: "center"
                   }}
                 />
-
-                <p style={{ color: "gray", fontSize: "12px" }}>Didn't receive code?
+                    <br />
+                <p style={{ color: "gray", fontSize: "12px", }}> Didn't receive code?
                   <button onClick={ResendOtp} style={{
                     color: "gray", fontSize: "12px",
                     border: "none", cursor: "pointer", background: "none"
@@ -227,7 +227,7 @@ function Model({ onHide }) {
                   onChange={(e) => setemail(e.target.value)}
                 />
                 <div className="passclass" style={{ display: "flex",
-                   border: "1px solid grey", borderRadius: "9px" }}>
+                   border: "1px solid grey", borderRadius: "9px", }}>
                   <input type={hideon ? "text" : "password"}
                     value={password}
                     placeholder="Enter your password"
@@ -245,10 +245,8 @@ function Model({ onHide }) {
                   >
                     {hideon ? <FaEye /> : <FaEyeSlash />}
                   </span>
-
-
-
                 </div>
+                
                 <div className="passclass" style={{ display: "flex", border: "1px solid grey", borderRadius: "8px" }}>
                   <input type={Confirmhideon?"text":"password"}
                     value={confirmPassword}
