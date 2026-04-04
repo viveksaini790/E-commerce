@@ -3,7 +3,7 @@ import "./Header.css";
 import { toast } from "react-toastify";
 import Model from "./Model";
 import { IoIosArrowDropdown } from "react-icons/io";
-import Cart from "./Cart";
+// import Cart from "./Cart";
 import { useLocation } from "react-router-dom";
 
 import { FaUser } from "react-icons/fa";
