@@ -10,6 +10,8 @@ import Footer from "./Component/Footer"
 import Ordercart from "./Component/Ordercart"
 
 import Checkout from "./Component/Buy/Buy"
+import About from "./Component/About"
+import Contact from "./Component/Contact"
 
 const App = () => {
 
@@ -28,7 +30,8 @@ const App = () => {
           <Route path="/userProfile" element={<UserProfile/>}/>
           <Route path="/buy/:id" element={<Checkout />} />
           <Route path="/orderview" element={<Ordercart/>} />
-        
+        <Route path="/about" element={<About/>} />
+        <Route path="/contact" element={<Contact/>} />
         </Routes>
         {/* </div> */}
         <Footer/>

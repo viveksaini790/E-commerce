@@ -1,53 +1,73 @@
 :root {
   --primary-color: rgb(71, 240, 175);
-  --primary-dark: #008b8b; /* Matching the Teal in your image */
+  --primary-dark: #008b8b;
   --white: #ffffff;
   --black: #000000;
   --gray-bg: #f8f9fa;
   --border-light: #e5e7eb;
   --text-dark: #111827;
-  --vishal:rgb(898, 240, 175)
 }
+
+/* MAIN CONTAINER */
 
 .gemini-checkout-container {
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 90px auto 20px auto;
   padding: 20px;
   background-color: var(--gray-bg);
   min-height: 100vh;
-  border: 2px solid;
-  margin-top: 90px;
 }
+
+/* BACK BUTTON */
 
 .gemini-back-btn {
   background: none;
   border: none;
   font-size: 28px;
   cursor: pointer;
-  margin-bottom: 10px;
-  display: block;
+  margin-bottom: 15px;
 }
 
-/* Layout adjustment to control the distribution */
+/* MAIN LAYOUT */
+
 .gemini-checkout-layout {
   display: flex;
   gap: 30px;
   align-items: flex-start;
-  justify-content: center; /* Centers the whole layout if it doesn't hit max-width */
+  justify-content: center;
 }
 
-/* LEFT BOX: Decreased width */
+/* LEFT ADDRESS BOX */
+
 .gemini-address-box {
-  flex: 1.2; /* Reduced from 2 to 1.2 to make it narrower */
-  max-width: 520px !important; /* Limits how wide the form can actually get */
+  flex: 1.2;
+  max-width: 600px;
   background: var(--white);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Ensure the payment box stays a fixed proportional size */
+.gemini-address-box2 {
+  flex: 1.2;
+  max-width: 600px;
+  background: var(--white);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+.address-card {
+  height: auto;
+  width: 100%;
+  /* border:2px solid; */
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+/* RIGHT PAYMENT BOX */
+
 .gemini-payment-box {
   flex: 0.8;
   max-width: 400px;
@@ -55,6 +75,8 @@
   flex-direction: column;
   gap: 20px;
 }
+
+/* FORM */
 
 .gemini-form-row {
   display: flex;
@@ -69,24 +91,21 @@
 }
 
 .gemini-input-group label {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-.gemini-input-group input, 
-.gemini-input-group select, 
+.gemini-input-group input,
+.gemini-input-group select,
 .gemini-input-group textarea {
   padding: 10px;
   border: 1px solid var(--border-light);
   border-radius: 6px;
-  background: #fff;
   font-size: 14px;
 }
 
-.gemini-input-group.full-width {
-  margin-bottom: 15px;
-}
+/* SAVE BUTTON */
 
 .gemini-save-container {
   display: flex;
@@ -95,57 +114,58 @@
 
 .gemini-save-btn {
   background: var(--primary-dark);
-  color: white;
-  padding: 8px 25px;
+  color: var(--white);
+  padding: 10px 25px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
 }
 
-/* RIGHT BOX */
-
+/* PAYMENT BUTTON */
 
 .gemini-pay-type-btn {
   background: var(--primary-dark);
-  color: white;
+  color: var(--white);
   width: 100%;
   padding: 12px;
   border: none;
   border-radius: 8px;
-  font-weight: 500;
   font-size: 16px;
 }
 
+/* COUPON */
+
 .gemini-coupon-wrapper {
   display: flex;
-  background: white;
+  background: var(--white);
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-light);
 }
 
 .gemini-coupon-wrapper input {
   flex: 1;
-  border: 1px solid var(--border-light);
   padding: 8px;
-  border-radius: 4px 0 0 4px;
+  border: none;
+  outline: none;
 }
 
 .gemini-apply-btn {
   background: var(--primary-dark);
-  color: white;
+  color: var(--white);
   border: none;
   padding: 0 15px;
-  border-radius: 0 4px 4px 0;
+  border-radius: 6px;
   cursor: pointer;
 }
 
+/* SUMMARY */
+
 .gemini-summary-card {
-  background: white;
+  background: var(--white);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-light);
 }
 
 .gemini-summary-row {
@@ -153,11 +173,9 @@
   justify-content: space-between;
   margin-bottom: 8px;
   font-size: 15px;
-  color: #444;
 }
 
 .gemini-divider {
-  border: 0;
   border-top: 1px solid var(--border-light);
   margin: 15px 0;
 }
@@ -165,20 +183,19 @@
 .gemini-total {
   font-weight: bold;
   font-size: 18px;
-  color: var(--black);
 }
 
 .gemini-terms-row {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin: 20px 0;
+  margin: 15px 0;
   font-size: 13px;
 }
 
 .gemini-checkout-submit {
   background: var(--primary-dark);
-  color: white;
+  color: var(--white);
   width: 100%;
   padding: 12px;
   border: none;
@@ -187,71 +204,170 @@
   cursor: pointer;
 }
 
-/* RESPONSIVE */
-/* Tablet Range: Between 600px and 900px */
-@media (min-width: 600px) and (max-width: 900px) {
-  .gemini-checkout-layout {
-    flex-direction: column; /* Stack vertically for better space management */
-    align-items: center;    /* Center the boxes */
-  }
+/* -------------------- */
+/* TABLET */
+/* -------------------- */
 
-  .gemini-address-box {
-    width: 400px;           /* Fixed width as requested */
-    flex: none;             /* Disable flex grow/shrink to keep it exactly 400px */
-  }
+@media (max-width: 900px) {
 
-  .gemini-payment-box {
-    width: 400px;           /* Match the width for a clean look */
-    flex: none;
-  }
-  
-  .gemini-form-row {
-    flex-direction: column; /* Stack inputs inside the form for narrow width */
-    gap: 10px;
-  }
-}
-
-/* Mobile: Below 600px */
-@media (max-width: 599px) {
   .gemini-checkout-layout {
     flex-direction: column;
-    gap: 30px;
     align-items: center;
-    justify-content: center;
   }
-  
-  .gemini-address-box, 
+
+  .gemini-address-box,
   .gemini-payment-box {
-    width: 100%;            /* Full width on small phones */
+    width: 420px;
     max-width: 100%;
   }
 
   .gemini-form-row {
     flex-direction: column;
+    gap: 10px;
   }
 }
 
-/* Desktop: Above 900px */
-@media (min-width: 901px) {
-  .gemini-address-box {
-    flex: 1.2;
-    max-width: 600px;
-  }
-  .gemini-payment-box {
-    flex: 0.8;
-    max-width: 400px;
-  }
-}
-/* @media (max-width: 900px) {
+/* -------------------- */
+/* MOBILE */
+/* -------------------- */
+@media (max-width:600px) {
+
   .gemini-checkout-layout {
     flex-direction: column;
-    
+    gap: 25px;
   }
-  .gemini-address-box{
-    max-width: 400px !important;
+
+  .gemini-address-box,
+  .gemini-address-box2,
+  .gemini-payment-box {
+    width: 100%;
+    max-width: 100%;
   }
+
   .gemini-form-row {
     flex-direction: column;
     gap: 10px;
   }
-} */
+
+}
+/* Main Container */
+
+.thankyou-container{
+  width:100%;
+  /* min-height:100vh; */
+  height: 400px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#e8fdf5,#ffffff);
+  position:relative;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+/* Back Button */
+
+.back-btn{
+  position:absolute;
+  top:125px;
+  left:25px;
+  background:none;
+  border:none;
+  font-size:42px;
+  color:#16a34a;
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+
+.back-btn:hover{
+  transform:scale(1.1);
+  color:#15803d;
+}
+
+/* Thankyou Card */
+
+.thankyou-box{
+  width:100%;
+  max-width:420px;
+  background:#ffffff;
+  padding:45px 35px;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+  text-align:center;
+  transition:0.3s;
+}
+
+.thankyou-box:hover{
+  transform:translateY(-4px);
+}
+
+/* Heading */
+
+.thankyou-box h2{
+  font-size:30px;
+  font-weight:600;
+  color:#16a34a;
+  margin-bottom:10px;
+}
+
+/* Paragraph */
+
+.thankyou-box p{
+  font-size:17px;
+  color:#555;
+  line-height:1.6;
+}
+
+/* Tablet */
+
+@media (max-width:768px){
+
+  .thankyou-box{
+    padding:35px 25px;
+    max-width:360px;
+  }
+
+  .thankyou-box h2{
+    font-size:26px;
+  }
+
+  .thankyou-box p{
+    font-size:15px;
+  }
+
+  .back-btn{
+    font-size:36px;
+      top:125px;
+    left:20px;
+  }
+
+}
+
+/* Mobile */
+
+@media (max-width:480px){
+
+  .thankyou-container{
+    padding:15px;
+  }
+
+  .thankyou-box{
+    padding:30px 20px;
+    max-width:100%;
+  }
+
+  .thankyou-box h2{
+    font-size:22px;
+  }
+
+  .thankyou-box p{
+    font-size:14px;
+  }
+
+  .back-btn{
+    font-size:32px;
+  top:100px;
+    left:15px;
+  }
+
+}

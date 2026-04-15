@@ -1,0 +1,257 @@
+:root {
+  --primary-color: rgb(71, 240, 175);
+  --primary-dark: #008b8b; /* Matching the Teal in your image */
+  --white: #ffffff;
+  --black: #000000;
+  --gray-bg: #f8f9fa;
+  --border-light: #e5e7eb;
+  --text-dark: #111827;
+  --vishal:rgb(898, 240, 175)
+}
+
+.gemini-checkout-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--gray-bg);
+  min-height: 100vh;
+  border: 2px solid;
+  margin-top: 90px;
+}
+
+.gemini-back-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Layout adjustment to control the distribution */
+.gemini-checkout-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: center; /* Centers the whole layout if it doesn't hit max-width */
+}
+
+/* LEFT BOX: Decreased width */
+.gemini-address-box {
+  flex: 1.2; /* Reduced from 2 to 1.2 to make it narrower */
+  max-width: 520px !important; /* Limits how wide the form can actually get */
+  background: var(--white);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  
+}
+
+/* Ensure the payment box stays a fixed proportional size */
+.gemini-payment-box {
+  flex: 0.8;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gemini-form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.gemini-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.gemini-input-group label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.gemini-input-group input, 
+.gemini-input-group select, 
+.gemini-input-group textarea {
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.gemini-input-group.full-width {
+  margin-bottom: 15px;
+}
+
+.gemini-save-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gemini-save-btn {
+  background: var(--primary-dark);
+  color: white;
+  padding: 8px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* RIGHT BOX */
+
+
+.gemini-pay-type-btn {
+  background: var(--primary-dark);
+  color: white;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.gemini-coupon-wrapper {
+  display: flex;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.gemini-coupon-wrapper input {
+  flex: 1;
+  border: 1px solid var(--border-light);
+  padding: 8px;
+  border-radius: 4px 0 0 4px;
+}
+
+.gemini-apply-btn {
+  background: var(--primary-dark);
+  color: white;
+  border: none;
+  padding: 0 15px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.gemini-summary-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.gemini-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #444;
+}
+
+.gemini-divider {
+  border: 0;
+  border-top: 1px solid var(--border-light);
+  margin: 15px 0;
+}
+
+.gemini-total {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--black);
+}
+
+.gemini-terms-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 13px;
+}
+
+.gemini-checkout-submit {
+  background: var(--primary-dark);
+  color: white;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+/* Tablet Range: Between 600px and 900px */
+@media (min-width: 600px) and (max-width: 900px) {
+  .gemini-checkout-layout {
+    flex-direction: column; /* Stack vertically for better space management */
+    align-items: center;    /* Center the boxes */
+  }
+
+  .gemini-address-box {
+    width: 400px;           /* Fixed width as requested */
+    flex: none;             /* Disable flex grow/shrink to keep it exactly 400px */
+  }
+
+  .gemini-payment-box {
+    width: 400px;           /* Match the width for a clean look */
+    flex: none;
+  }
+  
+  .gemini-form-row {
+    flex-direction: column; /* Stack inputs inside the form for narrow width */
+    gap: 10px;
+  }
+}
+
+/* Mobile: Below 600px */
+@media (max-width: 599px) {
+  .gemini-checkout-layout {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .gemini-address-box, 
+  .gemini-payment-box {
+    width: 100%;            /* Full width on small phones */
+    max-width: 100%;
+  }
+
+  .gemini-form-row {
+    flex-direction: column;
+  }
+}
+
+/* Desktop: Above 900px */
+@media (min-width: 901px) {
+  .gemini-address-box {
+    flex: 1.2;
+    max-width: 600px;
+  }
+  .gemini-payment-box {
+    flex: 0.8;
+    max-width: 400px;
+  }
+}
+/* @media (max-width: 900px) {
+  .gemini-checkout-layout {
+    flex-direction: column;
+    
+  }
+  .gemini-address-box{
+    max-width: 400px !important;
+  }
+  .gemini-form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+} */

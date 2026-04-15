@@ -19,8 +19,8 @@ function Cart() {
     //  const [userData, setuserData] = useState(prodata);
       const [filtercategory, setfiltercategory] = useState([]);
       
-       const getreducerdata=useSelector((state)=>state?.cart?.AddTocart)
-      //  console.log("getreducerdata ==",getreducerdata)
+       const getreducerdata=useSelector((state)=>state?.cart?.cart)
+       console.log("getreducerdata ",getreducerdata)
       const dispatch=useDispatch()
 
 // const [purchaseInc , setpurchaseInc] = useState(0)
@@ -57,25 +57,28 @@ const handleRemove=(id)=>{
   }
 
 
-const inc=(id)=>{
-   dispatch(incCartdata(id+1))
-// setpurchaseInc(purchaseInc+1)
+const inc = (id) => {
+  dispatch(incCartdata({
+    id: id,
+    type: "INC"
+  }))
 }
-const dec=(id)=>{
-// setpurchaseDec(purchaseDec-1)
-if(id>1){
-  dispatch(incCartdata(id-1))
-}
+
+const dec = (id) => {
+  dispatch(incCartdata({
+    id: id,
+    type: "DEC"
+  }))
 }
 const handleBackCrt=()=>{
-  navigate('/')
+  navigate(-1)
 }
 // console.log('filtercatergoryaaa',filtercategory)
-if(parsed.length==0){
-  setTimeout(() => {
-    navigate("/")
-  },2000);
-}
+// if(parsed.length==0){
+//   setTimeout(() => {
+//     navigate("/")
+//   },2000);
+// }
   return (
     <>
     <button className='cartBackbtn' onClick={handleBackCrt}>
@@ -106,9 +109,11 @@ if(parsed.length==0){
           <p className="gemini-item-desc">{item.description}</p>
           
           <div className="gemini-quantity-row">
-             <button onClick={() => dec(getreducerdata)} className="gemini-qty-btn">−</button>
-             <span className="gemini-qty-val">{getreducerdata || 0}</span>
-             <button onClick={() => inc(getreducerdata)} className="gemini-qty-btn">+</button>
+             <button onClick={() => dec(item.id)} className="gemini-qty-btn">−</button>
+             <span className="gemini-qty-val">
+              {getreducerdata?.find(i => i.id === item.id)?.quantity || 1}
+             </span>
+             <button onClick={() => inc(item.id)} className="gemini-qty-btn">+</button>
           </div>
         </div>
 

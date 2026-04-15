@@ -1822,9 +1822,11 @@ function Home() {
 
   const [cartLength, setcartLength] = useState(() => {
     const data = localStorage.getItem("cartItems");
+    console.log('data=',data)
     if (data) {
       const parsed = JSON.parse(data);
       return parsed;
+      
     }
     
     else {
@@ -1834,7 +1836,7 @@ function Home() {
   } );
 
   const navigate=useNavigate()
-
+// console.log('userdata=',userData)
   useEffect(() => {
     setuserData(myapi.Products)
     setfiltercategory(myapi.Products)

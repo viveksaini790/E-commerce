@@ -64,25 +64,7 @@ const [ buyreset, setbuyreset] = useState(false)
     setForm({
       ...form,
       [name]: type === "checkbox" ? checked : value
-    }); // if(name=== "address"){
-  //   if(value.length >0){
-  //     setbuyreset(true)
-  //   }
-  //   else if (value.length ===0){
-  //     setbuyreset(false)
-  //   }
-  // }
-
-  //  if(name === "address"){
-  //   if(value.length>=0){
-  //     const handleReset=()=>{
-
-  //     }
-  //     console.log(
-  //       'hello coder what is this'
-  //     )
-  //   }
-  //  }
+    }); 
 
 };
 
@@ -90,17 +72,6 @@ const { id } = useParams();
 console.log(
   'url id =',id
 )
-//  localStorage.setItem("Buyitems",JSON.stringify([id]))
-
-
-// useEffect(() => {
-//   if (form.address.length > 0 && form.name.length>0) {
-//     setbuyreset(true);
-//   } else {
-//     setbuyreset(false);
-//   }
-// }, [form]);
-
 
 const handleSave = (value) => {
   //  console.log("Saved Address:", form);
@@ -201,30 +172,16 @@ setwish(true)
 setForm(readwish)
 }
 
-// const handleCheckout = () => {
-//   if (!form.agree) {
-//     toast.error("Please agree to terms before payment");
-//     return;
-//   }
-//   toast.success("Proceeding to Checkout...");
-//   setthankyou(true)
-//   // setthankyou()
-//  localStorage.setItem("Buyitems",JSON.stringify([id]))
-//   setTimeout(() => {
-//     navigator("/")
+const handleCheckout =()=>{
+ if(!wish){
+  toast.error("please fill the form and save the address")
+}
+else if(!form.agree){
+      toast.error("Please agree to terms before payment");
+}
 
-//   }, 3000);
-
-// };
-
-if(handleSave){ }
-const handleCheckout = () => {
-  if (!form.agree) {
-    toast.error("Please agree to terms before payment");
-    return;
-  }
-
-  toast.success("Proceeding to Checkout...");
+else{
+    toast.success("Proceeding to Checkout...");
   setthankyou(true);
 
   // 1️⃣ Pehle localStorage se data nikalo
@@ -238,10 +195,11 @@ const handleCheckout = () => {
   // 3️⃣ Wapas localStorage me save karo
   localStorage.setItem("Buyitems", JSON.stringify(oldItems));
 
-  setTimeout(() => {
-    navigator("/");
-  }, 3000);
-};
+  // setTimeout(() => {
+  //   navigator("/");
+  // }, 3000);
+}
+}
 
 
 return (
@@ -259,9 +217,18 @@ return (
     />
 
 
-    {thankyou && (
-      <h2>Thankyou </h2>
-    )}
+   {thankyou && (
+  <div className="thankyou-container">
+    <button className="back-btn" onClick={() => navigator("/")}>
+      <IoArrowBackCircleSharp />
+    </button>
+    <div className="thankyou-box">
+      <h2>Thank You 🎉</h2>
+      <p>Your order has been placed successfully.</p>
+    </div>
+    
+  </div>
+)}
 
    {!thankyou && (
   <div className="gemini-checkout-container">
@@ -340,9 +307,9 @@ return (
       </div>
       ) :
    (
-     <div   className="gemini-address-box" >
+     <div   className="gemini-address-box2" >
           <h2>Select Address </h2>
-        <div style={{height:"auto", width:'500px', border:'2px solid'}}> 
+        <div className="address-card">
           <h3>Name= {readwish.name}</h3>
 <p>Phone= {readwish.phone}</p>
 <p>Address= {readwish.address}</p>
@@ -392,6 +359,7 @@ return (
           <button className="gemini-checkout-submit" onClick={handleCheckout}>
             Proceed To Checkout
           </button>
+          
         </div>
       </div>
     </div>

@@ -92,8 +92,8 @@ const purchasedataId = purchaseId ? JSON.parse(purchaseId) : [];
                   onClick={()=> navigate("/")}>
                     Home</button>
                   <button onClick={()=> navigate('/orderview')}>My Order</button>
-                  <button>About</button>
-                  <button>Contact</button>
+                  <button onClick={()=>navigate('/about')}>About</button>
+                  <button onClick={()=>navigate("/contact")}>Contact</button>
                   <button>Services</button>
                   <button>FAQ's</button>
                   <hr />

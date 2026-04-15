@@ -12,10 +12,16 @@ export const remove=(item)=>{
         payload:item
     }
 }
+export const incCartdata = (data) => {
+  return {
+    type: "UPDATE_CART",
+    payload: data
+  }
+}
 
-export const incCartdata=(item)=>{
-    return{
-        type:"increment",
-        payload:item
-    }
+export const decCartdata = (id) => {
+  return {
+    type: "decrement",
+    payload: id
+  }
 }
