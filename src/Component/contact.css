@@ -1,38 +1,198 @@
+/* MAIN CONTAINER */
+
 .contct{
     width: 100%;
-    height: 900px;
-    border: 2px solid;
+    min-height: 100vh;
+    background-color:#f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 120px 40px 60px 40px;
 }
+
+
+/* LEFT CONTACT FORM */
 
 .contct-left{
     width: 45%;
-    height: 750px;
-    border: 2px solid;
-    margin-top: 110px;
-    margin-left: 38px;
-
-    float: left;
-}
-.contct-right{
-    width: 45%;
-    height: 750px;
-    border: 2px solid;
-    margin-top: 110px;
-    margin-right: 38px;
-    float: right;
+    min-width: 320px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
 }
 
 .contct-left2{
     width: 92%;
-    height: 650px;
-    border: 2px solid;
-    margin-top: 30px;
-    margin-left: 25px;
-    margin-right: 20px;
-    margin-bottom: 50px;
+    margin: auto;
+    padding: 30px 0;
 }
 
 .contct-left2 input{
     width: 100%;
-     height: 40px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+textarea{
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+
+/* RIGHT MAP SECTION */
+
+.contct-right{
+    width: 45%;
+    min-width: 320px;
+    padding: 30px;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+}
+
+
+
+/* BUTTON */
+
+.subbtn{
+    height: 40px;
+    width: 90px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: white;
+    border: 2px solid #2f8f95;
+    color: rgb(137,110,160);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.subbtn:hover{
+    background-color:#2f8f95;
+    color:white;
+}
+
+
+
+/* MAP SECTION */
+
+.map-container{
+width:100%;
+height:auto;
+}
+
+.input1{
+    height:50px;
+    width:100%;
+    margin-top:30px;
+    margin-bottom:10px;
+    border-radius:5px;
+}
+
+
+
+/* LOCATION BUTTONS */
+
+.locat-btn{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:10px;
+}
+
+.locat-btn button{
+    min-width:100px;
+    height:40px;
+    border-radius:5px;
+    background-color:white;
+    border:1px solid #2f8f95;
+    color:rgb(126,108,143);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.locat-btn button:hover{
+    background-color:#2f8f95;
+    color:white;
+}
+
+
+
+/* INPUT BORDER */
+
+input{
+    border:1px solid rgb(206,206,245);
+}
+
+textarea{
+    border:1px solid rgb(205,205,230);
+}
+
+
+
+/* ========================= */
+/* 📱 TABLET RESPONSIVE */
+/* ========================= */
+
+@media (max-width:1024px){
+
+.contct{
+    padding:80px 20px;
+}
+
+.contct-left,
+.contct-right{
+    width:90%;
+}
+
+}
+
+
+
+/* ========================= */
+/* 📱 MOBILE RESPONSIVE */
+/* ========================= */
+
+@media (max-width:600px){
+
+.contct{
+    padding:60px 15px;
+}
+
+.contct-left,
+.contct-right{
+    width:100%;
+}
+
+.subbtn{
+    width:100%;
+}
+
+.locat-btn button{
+    width:45%;
+}
+
+}
+
+
+
+/* ========================= */
+/* 📱 SMALL MOBILE */
+/* ========================= */
+
+@media (max-width:400px){
+
+.locat-btn{
+    flex-direction:column;
+}
+
+.locat-btn button{
+    width:100%;
+}
+
 }
