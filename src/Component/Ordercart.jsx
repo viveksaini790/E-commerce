@@ -1850,7 +1850,7 @@ console.log('parse2=',parese2)
       <IoMdArrowRoundBack style={{height:"30px",width:"30px"}} />
       </button>
 
-      {parese2.length===0 && (
+      {filterId?.length===0 && (
    <div className='mainEmpty'>
   <div className='cartempt'>Data Not Found ?</div>
   </div>
