@@ -1839,10 +1839,10 @@ const handleremove=(cat)=>{
     return result;
    })
 }
-const resid=localStorage.getItem('Buyitems')
-console.log('resid',resid)
-const parese2=JSON.parse(resid)
-console.log('parse2=',parese2)
+// const resid=localStorage.getItem('Buyitems')
+// console.log('resid',resid)
+// const parese2=JSON.parse(resid)
+// console.log('parse2=',parese2)
   //  console.log('ndata length vivek',{ndata,length})
   return (
  <>
@@ -1850,7 +1850,7 @@ console.log('parse2=',parese2)
       <IoMdArrowRoundBack style={{height:"30px",width:"30px"}} />
       </button>
 
-      {filterId?.length===0 && (
+      {ndata?.length===0 && (
    <div className='mainEmpty'>
   <div className='cartempt'>Data Not Found ?</div>
   </div>
