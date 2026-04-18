@@ -331,7 +331,7 @@ function Model({ onHide }) {
             !otpbox ?
               <div className="modal-left">
                 <div className="logo">
-                  Next <span>Toppers</span>
+                  Products with the <span>quality</span>
                 </div>
 
                 <h3>Welcome !</h3>
@@ -363,7 +363,7 @@ function Model({ onHide }) {
                 {/* <div className="logo">
               Next <span>Toppers</span>
             </div> */}
-                <span className="logo">Next Toppers</span>
+                <span className="logo">Products with the quality</span>
                 <span>OTP Verification </span><br />
                 <span style={{ color: "gray", fontSize: "12px" }}>Please enter the 6-digit code we sent to your mobile number</span>
                 <br /><br />
