@@ -1,0 +1,92 @@
+.service-container{
+    width: 100%;
+    padding: 20px;
+    /* border: 2px solid; */
+    border: none;
+    box-sizing: border-box;
+}
+
+/* Common style for all services */
+.service1,
+.service2,
+.service3{
+   width: 100%;
+   min-height: 100px;
+   margin-top: 15px;
+   padding: 15px 20px;
+   box-shadow: 0 -3px 5px rgba(0,0,0,0.2), 0 3px 5px rgba(0,0,0,0.2);
+   background-color: rgba(164, 255, 255, 0.973);
+   box-sizing: border-box;
+}
+
+.service1{
+   margin-top: 68px;
+}
+
+.service3{
+   margin-bottom: 15px;
+}
+
+.service-container h2{
+   font-size: 22px;
+}
+
+.service-container p{
+   font-size: 16px;
+}
+
+/* Tablet */
+@media (max-width: 992px){
+
+.service-container h2{
+   font-size: 20px;
+}
+
+.service-container p{
+   font-size: 15px;
+}
+
+.service1,
+.service2,
+.service3{
+   padding: 14px 18px;
+}
+
+}
+
+/* Mobile */
+@media (max-width: 600px){
+
+.service-container{
+   padding: 10px;
+}
+
+.service-container h2{
+   font-size: 18px;
+}
+
+.service-container p{
+   font-size: 14px;
+}
+
+.service1,
+.service2,
+.service3{
+   padding: 12px 15px;
+   margin-top: 12px;
+}
+
+}
+
+/* Very small devices */
+@media (max-width: 400px){
+
+.service-container h2{
+   font-size: 16px;
+}
+
+.service-container p{
+   font-size: 13px;
+}
+
+}

@@ -58,7 +58,7 @@ const Profile = () => {
       </div>
       <div className="detail-row">
         <span className="detail-label">Email Address</span>
-        <span className="detail-value">{user.emaildata}</span>
+        <span className="detail-value">{user.email}</span>
       </div>
       <div className="detail-row">
         <span className="detail-label">Mobile Number</span>

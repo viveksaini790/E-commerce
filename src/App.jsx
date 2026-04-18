@@ -12,6 +12,8 @@ import Ordercart from "./Component/Ordercart"
 import Checkout from "./Component/Buy/Buy"
 import About from "./Component/About"
 import Contact from "./Component/Contact"
+import Services from "./Component/Services"
+import Faq from "./Component/Faq"
 
 const App = () => {
 
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/orderview" element={<Ordercart/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/services" element={<Services/>} />
+        <Route path="/faq" element={<Faq/>} />
         </Routes>
         {/* </div> */}
         <Footer/>

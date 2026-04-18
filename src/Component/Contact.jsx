@@ -67,10 +67,7 @@ if(name==="email"){
     }
   }
 
-//   const handlebtn=(item)=>{
-// localStorage.setItem("locatdata", JSON.stringify(item));
-// setloction(item)
-//   }
+
 const handlechange=(e)=>{
   setloction(e.target.value)
  

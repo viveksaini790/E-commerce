@@ -20,6 +20,9 @@ function Model({ onHide }) {
   const [Confirmhideon,setConfirmhideon]=useState(false);
   const [edit, setedit] = useState('');
 
+  const [singupfrom, setsignupform]=useState(false)
+ 
+
 
   const otpdata = "123456"
   const MobileNum = "7505200576"
@@ -107,14 +110,218 @@ function Model({ onHide }) {
     toast.success("successfully resend otp ")
   }
 
- 
+  const [form,setForm] = useState({
+    email:"",
+    password:""
+  })
+
+  const [signformdata, setsignupformdata]=useState({
+    email:"",
+    name:"",
+    password:"",
+    mobile:""
+    
+  })
+
+  console.log("signformdatasignformdata",signformdata)
+
+  const handleChange = (e)=>{
+    const {name,value} = e.target
+    setForm({...form,[name]:value})
+  }
+
+  const handleLogindata = (e)=>{
+    e.preventDefault();
+    if (!form.email) {
+      toast.error("enter your email")
+
+    } else if (!form.password) {
+      toast.error("enter your password")
+    }else{
+      handleLogin()
+    }
+  }
+
+   const handleChangedata = (e)=>{
+    const {name,value} = e.target;
+    setsignupformdata({...signformdata,[name]:value});
+  };
+
+  const handlesingupform=(e)=>{
+      e.preventDefault();
+    if (!signformdata.name) {
+      toast.error("enter your name")
+
+    } else if (!signformdata.email) {
+      toast.error("enter your email")
+    } else if (!signformdata.password) {
+      toast.error("enter you password")
+    } else if (!signformdata.mobile.length) {
+      toast.error("enter mobile number")
+    }else{
+      console.log("registerUserregisterUserregisterUser")
+      registerUser()
+    }
+
+  }
+
+
+   const registerUser = async () => {
+  
+    const response = await fetch("https://api.restful-api.dev/register",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "x-api-key":"06c1eb7d-dc82-4f83-a100-fa69c3cf593c"
+      },
+      body:JSON.stringify({
+        email:signformdata.email,
+        password:signformdata.password,
+        name:signformdata.name
+      })
+    })
+  
+    const data = await response.json()
+    const userobj=data?.user
+    console.log(data)
+    localStorage.setItem("userData", JSON.stringify(userobj));
+      toast.success("successfully ragistesion")
+      onHide();
+  
+  }
+
+
+   const handleLogin = async ()=>{
+
+    try{
+
+      const response = await fetch("https://api.restful-api.dev/login",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+         "x-api-key":"06c1eb7d-dc82-4f83-a100-fa69c3cf593c"
+        },
+        body:JSON.stringify({
+          email:form.email,
+          password:form.password
+        })
+      });
+
+      const data = await response.json();
+
+      const userobj=data?.user
+    console.log(data)
+    localStorage.setItem("userData", JSON.stringify(userobj));
+      toast.success("successfully login")
+      onHide();
+
+    }
+    catch(error){
+      console.log("Login Error",error)
+    }
+
+  };
+
+
+ let seconfrom='0'
+
+ if(seconfrom=='1'){
+  return(
+    <>
+    {!singupfrom &&(
+    <div className="modal-overlay">
+      <div className="modal-box">
+
+        <h2>Login</h2>
+
+        <form onSubmit={handleLogindata}>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            value={form.email}
+            onChange={handleChange}
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            value={form.password}
+            onChange={handleChange}
+          />
+
+          <button className="login-btn">Login</button>
+
+        </form>
+
+        <p className="signup-text">
+          Not registered?
+          <button className="signup-btn"  onClick={()=>setsignupform(!singupfrom)}>Sign In</button>
+        </p>
+
+      </div>
+    </div>
+    )}
+    
+{singupfrom &&(
+      <div className="modal-overlay">
+         <div className="modal-box">
+
+      <h2>Sign Up</h2>
+
+      <form  onSubmit={handlesingupform}>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter Name"
+          value={signformdata.name}
+          onChange={handleChangedata}
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter Email"
+          value={signformdata.email}
+          onChange={handleChangedata}
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          value={signformdata.password}
+          onChange={handleChangedata}
+        />
+
+        <input
+          type="tel"
+          name="mobile"
+          placeholder="Enter Mobile Number"
+          value={signformdata.mobile}
+          onChange={handleChangedata}
+        />
+
+        <button type="submit" className="login-btn">Sign Up</button>
+
+      </form>
+</div>
+</div>
+
+   )}  
+    </>
+  )
+ }
 
 
   return (
     <>
       {/* Backdrop */}
       <div className="custom-backdrop" ></div>
-
+     
       {/* Modal Box */}
       <div className="custom-modal">
         <div className="modal-inner">

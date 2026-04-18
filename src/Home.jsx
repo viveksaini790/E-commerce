@@ -1957,6 +1957,18 @@ console.log('value dataa e',e)
 
   }
 
+  
+ 
+
+  const fetchapi= async()=>{
+    const response= await fetch("https://api.restful-api.dev/objects")
+    const data = await response.json();
+    console.log("fetchapifetchapi",data)
+  }
+
+
+
+
   // console.log("cartLength", cartLength)
 
    if (!userData.length) {

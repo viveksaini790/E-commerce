@@ -39,6 +39,7 @@ const purchaseId = localStorage.getItem("Buyitems");
 const purchasedataId = purchaseId ? JSON.parse(purchaseId) : [];
 
   console.log("showprifile",showPrpfile)
+  
 
   return (
     <>
@@ -94,8 +95,8 @@ const purchasedataId = purchaseId ? JSON.parse(purchaseId) : [];
                   <button onClick={()=> navigate('/orderview')}>My Order</button>
                   <button onClick={()=>navigate('/about')}>About</button>
                   <button onClick={()=>navigate("/contact")}>Contact</button>
-                  <button>Services</button>
-                  <button>FAQ's</button>
+                  <button onClick={()=>navigate("/services")}>Services</button>
+                  <button onClick={()=>navigate('/faq')}>FAQ's</button>
                   <hr />
                  <button className="logout-btn" onClick={handlelogout}>
                     Logout
