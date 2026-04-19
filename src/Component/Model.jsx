@@ -1,382 +1,297 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import "./Model.css";
 import { toast } from "react-toastify";
 import OtpInput from "react-otp-input";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { TbEdit } from "react-icons/tb";
+import Spinner from "react-bootstrap/Spinner";
 
 function Model({ onHide }) {
-  const [number, setnumber] = useState("")
-  const [numbtn, setnumbtn] = useState(false)
+  // State for mobile number OTP flow
+  const [number, setNumber] = useState("");
+  const [numbtn, setNumBtn] = useState(false);
   const [otp, setOtp] = useState("");
-  const [otpbox, setotpbox] = useState(false)
-  const [userform, setuserform] = useState(false)
-  const [name, setname] = useState('')
-  const [email, setemail] = useState('')
-  const [password, setpassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [hideon, sethideon] = useState(false)
-  const [Confirmhideon,setConfirmhideon]=useState(false);
-  const [edit, setedit] = useState('');
+  const [otpbox, setOtpBox] = useState(false);
+  const [edit, setEdit] = useState("");
 
-  const [singupfrom, setsignupform]=useState(false)
- 
+  // State for signup form
+  const [userform, setUserForm] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [hideon, setHideOn] = useState(false);
+  const [confirmHideon, setConfirmHideOn] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
 
+  // State for login/signup toggle
+  const [isLogin, setIsLogin] = useState(true);
 
-  const otpdata = "123456"
-  const MobileNum = "7505200576"
-  const userobj = { name: "vivek", emaildata: "viveksaini78445@gmail.com", password: 12345678 }
+  // Mock data for demo
+  const otpdata = "123456";
+  const MobileNum = "7505200576";
+  const userobj = { name: "vivek", emaildata: "viveksaini78445@gmail.com", password: 12345678 };
 
-
-
-  // console.log("otpdata", otp)
-  const handlechange = (value) => {
+  // Handle mobile number input
+  const handleMobileChange = (value) => {
     let valuenum = value.replace(/[^0-9]/g, "");
-    // console.log("vivekhillo=", valuenum)
     if (valuenum.length > 10) return;
-    if (valuenum.length == 10) {
-      setnumbtn(true)
+    if (valuenum.length === 10) {
+      setNumBtn(true);
     } else {
-      setnumbtn(false)
+      setNumBtn(false);
     }
-
     if (valuenum.length === 1 && parseInt(valuenum[0]) <= 5) {
       return;
     }
-
-    setedit(valuenum);
-    setnumber(valuenum);
+    setEdit(valuenum);
+    setNumber(valuenum);
   };
 
-  const handleSumbit = () => {
-    toast.success("send OTP on your Mobile number")
-    setotpbox(true)
-  }
+  // Send OTP
+  const handleSendOtp = () => {
+    toast.success("OTP sent to your mobile number");
+    setOtpBox(true);
+  };
 
-  const handleverify = () => {
-    if (otpdata != otp) {
-      toast.error("otp invaild")
+  // Verify OTP
+  const handleVerifyOtp = () => {
+    if (otpdata !== otp) {
+      toast.error("Invalid OTP");
       return;
     }
-    if (MobileNum == number) {
-      toast.success("otp successfully submit")
+    if (MobileNum === number) {
+      toast.success("OTP verified successfully");
       localStorage.setItem("userData", JSON.stringify(userobj));
       onHide();
       return;
     }
-    setuserform(true)
-    
-    toast.success("otp successfully submit")
-  }
+    setUserForm(true);
+    toast.success("OTP verified successfully");
+  };
 
+  // Resend OTP
+  const handleResendOtp = () => {
+    toast.success("OTP resent successfully");
+  };
 
-  const handleSumbitdata = (e) => {
+  // Edit mobile number
+  const handleEditNumber = () => {
+    setOtpBox(false);
+    setOtp("");
+  };
+
+  // Signup form submission
+  const handleSignupSubmit = (e) => {
     e.preventDefault();
     if (!name) {
-      toast.error("enter your name")
-
-    } else if (!email) {
-      toast.error("enter your email")
-    } else if (!password) {
-      toast.error("enter you password")
-    } else if (password.length < 7) {
-      toast.error("password must greater than 8 digit")
+      toast.error("Enter your name");
+      return;
     }
-
-    else if (!confirmPassword) {
-      toast.error("enter your confirmpassoword")
-    } else if (password != confirmPassword) {
-      toast.error("password not match")
+    if (!email) {
+      toast.error("Enter your email");
+      return;
     }
-    else {
-      let userobj = {
-        name: name,
-        emaildata: email,
-        password: password,
-         number: number
-      }
-
-      localStorage.setItem("userData", JSON.stringify(userobj));
-      toast.success("successfully ragistesion")
-      onHide();
+    if (!password) {
+      toast.error("Enter your password");
+      return;
     }
-
-  }
-  const handleEditnum = () => {
-    setotpbox(false);
-  }
-  const ResendOtp = () => {
-    toast.success("successfully resend otp ")
-  }
-
-  const [form,setForm] = useState({
-    email:"",
-    password:""
-  })
-
-  const [signformdata, setsignupformdata]=useState({
-    email:"",
-    name:"",
-    password:"",
-    mobile:""
-    
-  })
-
-  console.log("signformdatasignformdata",signformdata)
-
-  const handleChange = (e)=>{
-    const {name,value} = e.target
-    setForm({...form,[name]:value})
-  }
-
-  const handleLogindata = (e)=>{
-    e.preventDefault();
-    if (!form.email) {
-      toast.error("enter your email")
-
-    } else if (!form.password) {
-      toast.error("enter your password")
-    }else{
-      handleLogin()
+    if (password.length < 7) {
+      toast.error("Password must be at least 8 characters");
+      return;
     }
-  }
-
-   const handleChangedata = (e)=>{
-    const {name,value} = e.target;
-    setsignupformdata({...signformdata,[name]:value});
+    if (!confirmPassword) {
+      toast.error("Enter your confirm password");
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    registerUser();
   };
 
-  const handlesingupform=(e)=>{
-      e.preventDefault();
-    if (!signformdata.name) {
-      toast.error("enter your name")
-
-    } else if (!signformdata.email) {
-      toast.error("enter your email")
-    } else if (!signformdata.password) {
-      toast.error("enter you password")
-    } else if (!signformdata.mobile.length) {
-      toast.error("enter mobile number")
-    }else{
-      console.log("registerUserregisterUserregisterUser")
-      registerUser()
+  // Login form submission
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Enter your email");
+      return;
     }
+    if (!password) {
+      toast.error("Enter your password");
+      return;
+    }
+    handleLogin();
+  };
 
-  }
-
-
-   const registerUser = async () => {
-  
-    const response = await fetch("https://api.restful-api.dev/register",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "x-api-key":"06c1eb7d-dc82-4f83-a100-fa69c3cf593c"
-      },
-      body:JSON.stringify({
-        email:signformdata.email,
-        password:signformdata.password,
-        name:signformdata.name
-      })
-    })
-  
-    const data = await response.json()
-    const userobj=data?.user
-    console.log(data)
-    localStorage.setItem("userData", JSON.stringify(userobj));
-      toast.success("successfully ragistesion")
-      onHide();
-  
-  }
-
-
-   const handleLogin = async ()=>{
-
-    try{
-
-      const response = await fetch("https://api.restful-api.dev/login",{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-         "x-api-key":"06c1eb7d-dc82-4f83-a100-fa69c3cf593c"
+  // API: Register User
+  const registerUser = async () => {
+    try {
+      setShowLoading(true);
+      const response = await fetch("https://api.restful-api.dev/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "06c1eb7d-dc82-4f83-a100-fa69c3cf593c"
         },
-        body:JSON.stringify({
-          email:form.email,
-          password:form.password
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name
         })
       });
 
+      if (!response.ok) {
+        const errorText = await response.text();
+        setShowLoading(false);
+        if (errorText.includes("User already exists")) {
+          toast.error("User already exists");
+        } else {
+          toast.error("Internal server error");
+        }
+        return;
+      }
+
       const data = await response.json();
-
-      const userobj=data?.user
-    console.log(data)
-    localStorage.setItem("userData", JSON.stringify(userobj));
-      toast.success("successfully login")
+      const userObj = data?.user;
+      localStorage.setItem("userData", JSON.stringify(userObj));
+      toast.success("Successfully registered");
       onHide();
-
+    } catch (err) {
+      setShowLoading(false);
+      toast.error("Internal server error");
+    } finally {
+      setShowLoading(false);
     }
-    catch(error){
-      console.log("Login Error",error)
-    }
-
   };
 
+  // API: Login
+  const handleLogin = async () => {
+    try {
+      setShowLoading(true);
+      const response = await fetch("https://api.restful-api.dev/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "06c1eb7d-dc82-4f83-a100-fa69c3cf593c"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        setShowLoading(false);
+        if (errorText.includes("Password is incorrect")) {
+          toast.error("Password is incorrect");
+        } else if(errorText.includes("A user with this email does not exist")){
+              toast.error("user  not register");
+        }
+          else {
+          toast.error("Internal server error");
+        }
+        return;
+      }
 
- let seconfrom='0'
+      const data = await response.json();
+      const userObj = data?.user;
+      localStorage.setItem("userData", JSON.stringify(userObj));
+      toast.success("Successfully logged in");
+      onHide();
+    } catch (error) {
+      toast.error("Login failed");
+    } finally {
+      setShowLoading(false);
+    }
+  };
 
- if(seconfrom=='1'){
-  return(
-    <>
-    {!singupfrom &&(
-    <div className="modal-overlay">
-      <div className="modal-box">
+  // Switch to signup
+  const handleSignupSwitch = () => {
+    setIsLogin(false);
+    setUserForm(true);
+    setOtpBox(false);
+  };
 
-        <h2>Login</h2>
-
-        <form onSubmit={handleLogindata}>
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Email"
-            value={form.email}
-            onChange={handleChange}
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            value={form.password}
-            onChange={handleChange}
-          />
-
-          <button className="login-btn">Login</button>
-
-        </form>
-
-        <p className="signup-text">
-          Not registered?
-          <button className="signup-btn"  onClick={()=>setsignupform(!singupfrom)}>Sign In</button>
-        </p>
-
-      </div>
-    </div>
-    )}
-    
-{singupfrom &&(
-      <div className="modal-overlay">
-         <div className="modal-box">
-
-      <h2>Sign Up</h2>
-
-      <form  onSubmit={handlesingupform}>
-
-        <input
-          type="text"
-          name="name"
-          placeholder="Enter Name"
-          value={signformdata.name}
-          onChange={handleChangedata}
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          value={signformdata.email}
-          onChange={handleChangedata}
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={signformdata.password}
-          onChange={handleChangedata}
-        />
-
-        <input
-          type="tel"
-          name="mobile"
-          placeholder="Enter Mobile Number"
-          value={signformdata.mobile}
-          onChange={handleChangedata}
-        />
-
-        <button type="submit" className="login-btn">Sign Up</button>
-
-      </form>
-</div>
-</div>
-
-   )}  
-    </>
-  )
- }
-
+  // Switch to login
+  const handleLoginSwitch = () => {
+    setIsLogin(true);
+    setUserForm(false);
+    setOtpBox(false);
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setNumber("");
+    setOtp("");
+  };
 
   return (
     <>
-      {/* Backdrop */}
-      <div className="custom-backdrop" ></div>
-     
-      {/* Modal Box */}
+      <div className="custom-backdrop"></div>
       <div className="custom-modal">
         <div className="modal-inner">
- 
-          {/* LEFT */}
-          {!userform && (
-            !otpbox ?
-              <div className="modal-left">
-                <div className="logo">
-                  Products with the <span>quality</span>
-                </div>
+          {/* LEFT SECTION */}
+          <div className="modal-left">
+            <div className="logo">
+              Products with the <span>quality</span>
+            </div>
 
-                <h3>Welcome !</h3>
-                <p>Enter your mobile number</p>
-
-                <div className="phone-input">
-                  <span className="flag">+91</span>
-                  {/* <input type="number" */}
-                  <input type="tel"
-                    value={number}
-                    placeholder="Enter Mobile Number"
-                    onChange={(e) => handlechange(e.target.value)}
+            {!userform && !otpbox && (
+              // LOGIN FORM
+              <div className="auth-form">
+                <h3>Welcome Back!</h3>
+                <form onSubmit={handleLoginSubmit}>
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="form-input"
                   />
-                </div>
-
-                <button className="continue-btn"
-                  style={{ background: numbtn ? "#565454" : "#999" }}
-                  disabled={!numbtn ? true : false}
-                  onClick={handleSumbit}
-
-                >Continue</button>
-
+                  <div className="password-wrapper">
+                    <input
+                      type={hideon ? "text" : "password"}
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="form-input"
+                    />
+                    <span className="eye-icon" onClick={() => setHideOn(!hideon)}>
+                      {hideon ? <FaEye /> : <FaEyeSlash />}
+                    </span>
+                  </div>
+                  <button type="submit" className="continue-btn" disabled={showLoading}>
+                    {showLoading ? <Spinner animation="border" size="sm" /> : "Login"}
+                  </button>
+                </form>
+                <p className="switch-text">
+                  Don't have an account?{" "}
+                  <button onClick={handleSignupSwitch} className="switch-btn">
+                    Sign Up
+                  </button>
+                </p>
                 <small>
-                  By continuing you agree to our <b>Term & Conditions</b>
+                  By continuing you agree to our <b>Terms & Conditions</b>
                 </small>
               </div>
-              :
-              <div style={{ padding: "15px", margin: "20px 10px" }}>
-                {/* <div className="logo">
-              Next <span>Toppers</span>
-            </div> */}
-                <span className="logo">Products with the quality</span>
-                <span>OTP Verification </span><br />
-                <span style={{ color: "gray", fontSize: "12px" }}>Please enter the 6-digit code we sent to your mobile number</span>
-                <br /><br />
-                <div style={{ color: "gray", fontSize: "14px" }}> +91{edit}
-                  <sub>
-                    <button onClick={handleEditnum} style={{ border: "none", background: "none" }}>
-                      <sub><TbEdit style={{ cursor: "pointer", fontSize: "19px" }} /></sub>
+            )}
 
-                    </button>
-                  </sub>
+            {otpbox && (
+              // OTP VERIFICATION
+              <div className="otp-section">
+                <div className="logo">Products with the quality</div>
+                <h4>OTP Verification</h4>
+                <p className="otp-desc">
+                  Please enter the 6-digit code sent to your mobile number
+                </p>
+                <div className="mobile-edit">
+                  +91 {edit}
+                  <button onClick={handleEditNumber} className="edit-btn">
+                    <TbEdit />
+                  </button>
                 </div>
-                <br /><br />
-
                 <OtpInput
                   value={otp}
                   onChange={setOtp}
@@ -384,111 +299,122 @@ function Model({ onHide }) {
                   renderSeparator={<span> </span>}
                   renderInput={(props) => <input {...props} />}
                   inputStyle={{
-                    width: "40px",
-                    height: "40px",
+                    width: "45px",
+                    height: "45px",
                     margin: "0 5px",
                     fontSize: "18px",
-                    borderRadius: "6px",
+                    borderRadius: "8px",
                     border: "1px solid #ccc",
                     textAlign: "center"
                   }}
                 />
-                    <br />
-                <p style={{ color: "gray", fontSize: "12px", }}> Didn't receive code?
-                  <button onClick={ResendOtp} style={{
-                    color: "gray", fontSize: "12px",
-                    border: "none", cursor: "pointer", background: "none"
-                  }}>
-                    <h4>Resend</h4></button> </p>
-                <br /><br />
-                <button className="continue-btn"
-
-                  style={{ background: otp.length == 6 ? "#565454" : "#999" }}
-                  disabled={otp.length == 6 ? false : true}
-                  onClick={handleverify}
+                <p className="resend-text">
+                  Didn't receive code?{" "}
+                  <button onClick={handleResendOtp} className="resend-btn">
+                    Resend
+                  </button>
+                </p>
+                <button
+                  className="continue-btn"
+                  style={{ background: otp.length === 6 ? "#565454" : "#999" }}
+                  disabled={otp.length !== 6}
+                  onClick={handleVerifyOtp}
                 >
                   Verify OTP
                 </button>
               </div>
+            )}
 
-          )}
-
-
-          {userform && (
-            <div className="form-container">
-              <form name="frm" className="custom-form" onSubmit={handleSumbitdata}  >
+            {userform && !otpbox && (
+              // SIGNUP FORM
+              <div className="auth-form">
                 <h3>Create Account</h3>
-
-                <input type="text"
-                  className="classInput"
-                  value={name}
-                  placeholder="Enter your name"
-                  onChange={(e) => setname(e.target.value)}
-
-
-                />
-                <input type="email"
-                  value={email}
-                  className="classInput"
-                  placeholder="Enter your email"
-                  onChange={(e) => setemail(e.target.value)}
-                />
-                <div className="passclass" style={{ display: "flex",
-                   border: "1px solid grey", borderRadius: "9px", }}>
-                  <input type={hideon ? "text" : "password"}
-                    value={password}
-                    placeholder="Enter your password"
-                    className="passinput"
-
-                    onChange={(e) => setpassword(e.target.value)}
-
+                <form onSubmit={handleSignupSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="form-input"
                   />
-                  <span
-                    className="icaneye"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      sethideon(!hideon);
-                    }}
-                  >
-                    {hideon ? <FaEye /> : <FaEyeSlash />}
-                  </span>
-                </div>
-                
-                <div className="passclass" style={{ display: "flex", border: "1px solid grey", borderRadius: "8px" }}>
-                  <input type={Confirmhideon?"text":"password"}
-                    value={confirmPassword}
-                    placeholder="conFirm your password"
-                    className="passinput"
-
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="form-input"
                   />
-                  <span className="icaneye"
-                   onClick={(e) => {
-                      e.preventDefault();
-                      setConfirmhideon(!Confirmhideon);
-                    }}
-                  >
-                     {Confirmhideon ? <FaEye /> : <FaEyeSlash />}
+                  <div className="password-wrapper">
+                    <input
+                      type={hideon ? "text" : "password"}
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="form-input"
+                    />
+                    <span className="eye-icon" onClick={() => setHideOn(!hideon)}>
+                      {hideon ? <FaEye /> : <FaEyeSlash />}
                     </span>
+                  </div>
+                  <div className="password-wrapper">
+                    <input
+                      type={confirmHideon ? "text" : "password"}
+                      placeholder="Confirm your password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="form-input"
+                    />
+                    <span className="eye-icon" onClick={() => setConfirmHideOn(!confirmHideon)}>
+                      {confirmHideon ? <FaEye /> : <FaEyeSlash />}
+                    </span>
+                  </div>
+                  <button type="submit" className="continue-btn" disabled={showLoading}>
+                    {showLoading ? <Spinner animation="border" size="sm" /> : "Register"}
+                  </button>
+                </form>
+                <p className="switch-text">
+                  Already have an account?{" "}
+                  <button onClick={handleLoginSwitch} className="switch-btn">
+                    Login
+                  </button>
+                </p>
+              </div>
+            )}
+
+            {/* Mobile Number OTP Option */}
+            {/* {!userform && !otpbox && (
+              <>
+                <div className="divider">
+                  <span>OR</span>
                 </div>
-                <button type="submit">Register</button>
-              </form>
-            </div>
-
-          )}
-
-          {/* RIGHT */}
-          <div className="modal-right">
-            <img
-              src="/loginImg.png"
-              alt="login art"
-            />
+                <div className="phone-input">
+                  <span className="flag">+91</span>
+                  <input
+                    type="tel"
+                    value={number}
+                    placeholder="Enter Mobile Number"
+                    onChange={(e) => handleMobileChange(e.target.value)}
+                  />
+                </div>
+                <button
+                  className="continue-btn"
+                  style={{ background: numbtn ? "#565454" : "#999" }}
+                  disabled={!numbtn}
+                  onClick={handleSendOtp}
+                >
+                  Continue with OTP
+                </button>
+              </>
+            )} */}
           </div>
 
-          {/* CLOSE */}
-          <span className="close-btn" onClick={onHide}>✕</span>
+          {/* RIGHT SECTION - Image */}
+          <div className="modal-right">
+            <img src="/loginImg.png" alt="login art" />
+          </div>
 
+          {/* CLOSE BUTTON */}
+          <span className="close-btn" onClick={onHide}>✕</span>
         </div>
       </div>
     </>
